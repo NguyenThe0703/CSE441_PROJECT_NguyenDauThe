@@ -1,7 +1,10 @@
 package com.example.cse441_project.Login_Logout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -24,7 +27,7 @@ public class IntroActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
-
+    private Button startbtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +37,14 @@ public class IntroActivity extends AppCompatActivity {
         // Khởi tạo FirebaseAuth và FirebaseFirestore
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
-
-        registerUser();
+        startbtn = findViewById(R.id.btnStart);
+        startbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -43,34 +52,4 @@ public class IntroActivity extends AppCompatActivity {
             return insets;
         });
     }
-
-    private void registerUser() {
-        // Thay thế với email và mật khẩu hợp lệ
-        firebaseAuth.createUserWithEmailAndPassword("admin@gmail.com", "admin1234")
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Tạo thông tin người dùng
-                        Employee employee = new Employee("001", "admin", "admin", "admin123", "Nguyen Van A", "Nam", "27/09/2000", "0293712334");
-
-                        // Lấy UID của người dùng đã đăng ký
-                        String uid = firebaseAuth.getCurrentUser().getUid();
-
-                        // Lưu thông tin người dùng vào Firebase Realtime Database
-                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference reference = database.getReference("NhanVien");
-
-                        reference.child(uid).setValue(employee)
-                                .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(IntroActivity.this, "Đăng ký thành công và đã lưu dữ liệu!", Toast.LENGTH_SHORT).show();
-                                })
-                                .addOnFailureListener(e -> {
-                                    Toast.makeText(IntroActivity.this, "Lỗi khi lưu thông tin!", Toast.LENGTH_SHORT).show();
-                                });
-                    } else {
-                        // Xử lý lỗi đăng ký
-                        Toast.makeText(IntroActivity.this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
 }

@@ -2,7 +2,8 @@
   "project_info": {
     "project_number": "571428838791",
     "project_id": "project-70f25",
-    "storage_bucket": "project-70f25.appspot.com"
+    "storage_bucket": "project-70f25.appspot.com",
+    "firebase_url" :  "https://project-70f25-default-rtdb.asia-southeast1.firebasedatabase.app/"
   },
   "client": [
     {

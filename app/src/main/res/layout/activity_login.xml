@@ -7,7 +7,7 @@
     android:background="#F07D2A">
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/edtPass"
         android:layout_width="355dp"
         android:layout_height="72dp"
         android:layout_marginStart="28dp"
@@ -17,14 +17,14 @@
         android:ems="10"
         android:inputType="text"
         android:padding="16dp"
-        android:text="Username"
-        android:textColor="#FFFFFF"
+        android:text="Mật khẩu"
+        android:textColor="#292424"
 
         android:textColorHint="#FFFFFF"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+        app:layout_constraintTop_toBottomOf="@+id/edtUser" />
 
     <TextView
         android:id="@+id/textView3"
@@ -55,25 +55,27 @@
         tools:srcCompat="@drawable/ic_1" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/edtUser"
         android:layout_width="355dp"
         android:layout_height="72dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="48dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
         android:inputType="text"
         android:padding="16dp"
-        android:text="Username"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#FFFFFF"
+        android:text="Tên đăng nhập"
+        android:textColor="#292323"
 
+        android:textColorHint="#FFFFFF"
         android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnLogin"
         android:layout_width="225dp"
         android:layout_height="71dp"
 

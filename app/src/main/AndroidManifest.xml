@@ -25,6 +25,16 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <activity
+            android:name=".Login_Logout.LoginActivity">
+
+        </activity>
+        <activity
+            android:name=".Home.HomeActivity">
+
+        </activity>
+
+
     </application>
 
 </manifest>
