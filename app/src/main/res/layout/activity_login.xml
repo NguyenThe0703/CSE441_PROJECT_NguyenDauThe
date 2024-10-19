@@ -39,14 +39,14 @@
         android:layout_width="355dp"
         android:layout_height="72dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="28dp"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
         android:hint="Tên đăng nhập"
+
         android:inputType="text"
         android:padding="16dp"
-
         android:textColor="#292323"
         android:textColorHint="#5D5252"
         android:textSize="24dp"
@@ -79,14 +79,15 @@
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
         android:hint="Mật khẩu"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:padding="16dp"
         android:textColor="#292323"
         android:textColorHint="#5D5252"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edtUser" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
