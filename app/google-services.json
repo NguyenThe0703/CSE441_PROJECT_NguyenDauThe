@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "285164236838",
+    "project_id": "hi-fashion-7a629",
+    "storage_bucket": "hi-fashion-7a629.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285164236838:android:bc6b0f74e549edf80176e7",
+        "android_client_info": {
+          "package_name": "com.example.cse441_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWrXjB7teHqlCYsGA4OlkuB6n-Q82crSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
