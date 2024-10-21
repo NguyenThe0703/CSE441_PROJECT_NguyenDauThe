@@ -12,57 +12,51 @@ public class FoodItem {
     }
 
     // Constructor with parameters
-    public FoodItem(String itemFoodID, String menuName, double price, String categoryId, String imageUrl) {
+    public FoodItem(String itemFoodID, String foodName, double price, String categoryId, String imageUrl) {
         this.itemFoodID = itemFoodID;
-        this.foodName = menuName;
+        this.foodName = foodName;
         this.price = price;
         this.categoryId = categoryId;
         this.imageUrl = imageUrl;
     }
 
-    // Getter and setter for menuId (MaThucDon)
-    public String getMenuId() {
+    public String getItemFoodID() {
         return itemFoodID;
     }
 
-    public void setMenuId(String menuId) {
-        this.itemFoodID = menuId;
-    }
-
-    // Getter and setter for menuName (TenThucDon)
-    public String getMenuName() {
+    public String getFoodName() {
         return foodName;
     }
 
-    public void setMenuName(String menuName) {
-        this.foodName = menuName;
-    }
-
-    // Getter and setter for price (GiaTien)
     public double getPrice() {
         return price;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setItemFoodID(String itemFoodID) {
+        this.itemFoodID = itemFoodID;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 
     public void setPrice(double price) {
         this.price = price;
     }
 
-    // Getter and setter for categoryId (MaLoai)
-    public String getCategoryId() {
-        return categoryId;
-    }
-
     public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
-    }
-
-    // Getter and setter for imageUrl (Anh)
-    public String getImageUrl() {
-        return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }

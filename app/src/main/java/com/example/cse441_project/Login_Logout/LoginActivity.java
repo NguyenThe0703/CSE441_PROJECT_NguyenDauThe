@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText edtUser,edtPass;
@@ -38,11 +39,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-        // Khởi tạo EditText
-
+        autoLogin();
         edtUser = findViewById(R.id.edtUser);
         edtPass = findViewById(R.id.edtPass);
-
         // Khởi tạo nút đăng nhập và thiết lập sự kiện click
         Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -57,70 +56,106 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Username và Password không được để trống!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                // Gọi phương thức để kiểm tra thông tin đăng nhập
                 checkLoginCredentials();
             }
         });
 
     }
-
     private void checkLoginCredentials() {
-        // Tạo tham chiếu tới Firebase Realtime Database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Employee");
+        // Tạo tham chiếu tới Cloud Firestore
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        // Lắng nghe dữ liệu tại nhánh "Employee"
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                boolean isValidUser = false;
+        // Lấy tất cả người dùng từ collection "employees"
+        db.collection("Employees")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        boolean isValidUser = false;
 
-                // Duyệt qua các dữ liệu con
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    // Lấy dữ liệu và chuyển đổi thành đối tượng Employee
-                    Employee employee = snapshot.getValue(Employee.class);
-                    if (employee != null) {
-                        String usernameFromDb = employee.getUsername(); // Thay bằng phương thức thực tế lấy username
-                        String passwordFromDb = employee.getPassword(); // Thay bằng phương thức thực tế lấy password
+                        // Duyệt qua các tài liệu trong collection
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Employee employee = document.toObject(Employee.class);
 
-                        // Kiểm tra thông tin đăng nhập
-                        if (UserName.equals(usernameFromDb) && PassWorld.equals(passwordFromDb)) {
-                            isValidUser = true;
+                            if (employee != null) {
+                                String usernameFromDb = employee.getUsername(); // Lấy username từ đối tượng Employee
+                                String passwordFromDb = employee.getPassword(); // Lấy password từ đối tượng Employee
 
-                            // Lưu thông tin đăng nhập vào SharedPreferences
-                            saveLoginCredentials(usernameFromDb, passwordFromDb);
+                                if (UserName.equals(usernameFromDb) && PassWorld.equals(passwordFromDb)) {
+                                    isValidUser = true;
 
-                            break;
+                                    // Lưu thông tin đăng nhập vào SharedPreferences
+                                    saveLoginCredentials(UserName, PassWorld);
+
+                                    break;
+                                }
+                            }
                         }
+                        if (isValidUser) {
+                            // Chuyển đến activity tiếp theo hoặc thực hiện hành động đăng nhập thành công
+                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, AddFoodActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // Thông báo đăng nhập thất bại
+                            Toast.makeText(LoginActivity.this, "Thông tin đăng nhập không đúng!", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Xử lý lỗi khi truy vấn không thành công
+                        Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }
-                if (isValidUser) {
-                    // Chuyển đến activity tiếp theo hoặc thực hiện hành động đăng nhập thành công
-                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, AddFoodActivity.class);
-                    startActivity(intent);
-                } else {
-                    // Thông báo đăng nhập thất bại
-                    Toast.makeText(LoginActivity.this, "Thông tin đăng nhập không đúng!", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Xử lý lỗi khi truy vấn bị hủy
-                Toast.makeText(LoginActivity.this, "Error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                })
+                .addOnFailureListener(e -> {
+                    // Xử lý lỗi khi lấy dữ liệu từ Firestore thất bại
+                    Toast.makeText(LoginActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
+    // Phương thức để lưu thông tin đăng nhập
     private void saveLoginCredentials(String username, String password) {
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("username", username);
         editor.putString("password", password);
-        editor.apply(); // Lưu thông tin vào SharedPreferences
+        editor.apply();
     }
+    private void autoLogin() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+        String password = sharedPreferences.getString("password", null);
+        if(username == null|| password==null)   return;
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+        db.collection("Employees")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        boolean isValidUser = false;
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Employee employee = document.toObject(Employee.class);
+                            if (employee != null) {
+                                String usernameFromDb = employee.getUsername(); // Lấy username từ đối tượng Employee
+                                String passwordFromDb = employee.getPassword(); // Lấy password từ đối tượng Employee
+
+                                if (username.equals(usernameFromDb) && password.equals(passwordFromDb)) {
+                                    isValidUser = true;
+                                    saveLoginCredentials(UserName, PassWorld);
+                                    break;
+                                }
+                            }
+                        }
+                        if (isValidUser) {
+
+                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, AddFoodActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
+    }
+
 
 
 }
