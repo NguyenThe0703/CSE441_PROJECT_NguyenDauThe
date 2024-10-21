@@ -1,15 +1,16 @@
 package com.example.cse441_project.Model;
 
-public class MenuCategory {
+public class Category {
     private String categoryId;   // MaLoai
     private String categoryName; // TenLoai
 
 
-    public MenuCategory() {
+    public Category() {
     }
 
     // Constructor with parameters
-    public MenuCategory(String categoryId, String categoryName) {
+    
+    public Category(String categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }

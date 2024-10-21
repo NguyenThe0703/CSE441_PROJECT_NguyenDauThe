@@ -1,5 +1,8 @@
 package com.example.cse441_project.Model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Employee {
     private String employeeId; // maNV
     private String username;    // tenDN
@@ -23,6 +26,18 @@ public class Employee {
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.idCard = idCard;
+    }
+    public Map<String, Object> toMap() {
+        Map<String, Object> employeeMap = new HashMap<>();
+        employeeMap.put("employeeId", employeeId);
+        employeeMap.put("username", username);
+        employeeMap.put("role", role);
+        employeeMap.put("password", password);
+        employeeMap.put("fullName", fullName);
+        employeeMap.put("gender", gender);
+        employeeMap.put("dateOfBirth", dateOfBirth);
+        employeeMap.put("idCard", idCard);
+        return employeeMap;
     }
 
     // Getters and setters for each property

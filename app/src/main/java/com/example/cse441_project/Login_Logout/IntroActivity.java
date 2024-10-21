@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -14,22 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.cse441_project.Home.HomeActivity;
+import com.example.cse441_project.Home.AddFoodActivity;
 import com.example.cse441_project.Model.Employee;
-import com.example.cse441_project.Model.MenuCategory;
 import com.example.cse441_project.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -50,11 +40,12 @@ public class IntroActivity extends AppCompatActivity {
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(IntroActivity.this, HomeActivity.class);
+                Intent intent = new Intent(IntroActivity.this, AddFoodActivity.class);
                 startActivity(intent);
             }
         });
-
+        Employee newEmployee = new Employee("1", "Admin", "Admin", "admin", "Hoàng Quốc Huy", "Male", "1990-01-01", "123456789");
+        addEmployeeToFirestore(newEmployee);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -98,5 +89,25 @@ public class IntroActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
+public void addEmployeeToFirestore(Employee employee) {
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+    // Tạo document với employeeId làm tên document
+    db.collection("Employees").document(employee.getEmployeeId())
+            .set(employee.toMap())
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    // Thành công
+                    Log.d("Firestore", "Employee added successfully");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    // Thất bại
+                    Log.w("Firestore", "Error adding employee", e);
+                }
+            });
+}
 }

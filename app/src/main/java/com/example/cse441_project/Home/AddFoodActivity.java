@@ -17,11 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.cse441_project.Login_Logout.IntroActivity;
-import com.example.cse441_project.Login_Logout.LoginActivity;
-import com.example.cse441_project.MainActivity;
 import com.example.cse441_project.Model.FoodItem;
-import com.example.cse441_project.Model.MenuCategory;
+import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,7 +41,7 @@ public class AddFoodActivity extends AppCompatActivity {
     private Button cancel;
     private ImageView image;
     private static final int PICK_IMAGE_REQUEST = 1;
-    List<MenuCategory> category = new ArrayList<>();
+    List<Category> category = new ArrayList<>();
     List<String> categoryNames = new ArrayList<>();
     private Uri imageUri;
     private String lastID;
@@ -130,10 +127,8 @@ public class AddFoodActivity extends AppCompatActivity {
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             DatabaseReference myRef = db.getReference("FoodItem");
 
-            double id = Double.parseDouble(lastID);
-            // Tạo ID cho món ăn mới
 
-            FoodItem foodItem = new FoodItem(lastID, selectedCategory, foodPrice, findCategoryIdByName(selectedCategory), imageUrl);
+            FoodItem foodItem = new FoodItem(lastID, foodItemName, foodPrice, findCategoryIdByName(selectedCategory), imageUrl);
 
             // Lưu món ăn vào database
             myRef.child(lastID).setValue(foodItem)
@@ -141,7 +136,7 @@ public class AddFoodActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(AddFoodActivity.this, "Món ăn đã được thêm thành công!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddFoodActivity.this, MainActivity.class);
+                            Intent intent = new Intent(AddFoodActivity.this, HomeActivity.class);
                             startActivity(intent);
                         }
                     })
@@ -173,7 +168,7 @@ public class AddFoodActivity extends AppCompatActivity {
                 // Duyệt qua tất cả các node con của "MenuCategory"
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     // Lấy đối tượng MenuCategory từ snapshot
-                    MenuCategory menuCategory = snapshot.getValue(MenuCategory.class);
+                    Category menuCategory = snapshot.getValue(Category.class);
                     if (menuCategory != null) {
                         // Thêm tên danh mục vào danh sách
                         category.add(menuCategory);
@@ -195,9 +190,9 @@ public class AddFoodActivity extends AppCompatActivity {
 
     }
     public String findCategoryIdByName(String categoryName) {
-        for (MenuCategory menuCategory : category) {
-            if (menuCategory.getCategoryName().equals(categoryName)) {
-                return menuCategory.getCategoryId();
+        for (Category category : this.category) {
+            if (category.getCategoryName().equals(categoryName)) {
+                return category.getCategoryId();
             }
         }
         return null;
@@ -237,21 +232,30 @@ public class AddFoodActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        String lastItemFoodId = snapshot.getKey();  // Lấy ra itemFoodID cuối cùng
-                        lastID =  lastItemFoodId;
+                        String lastItemFoodId = snapshot.getKey();
 
+                        // Kiểm tra và chuyển đổi ID
+                        try {
+                            double id = Double.parseDouble(lastItemFoodId);
+                            id += 1;  // Tăng ID lên 1
+                            lastID = String.valueOf((int) id);  // Chuyển đổi lại về dạng String
+                        } catch (NumberFormatException e) {
+                            Log.e("Firebase", "Error parsing last itemFoodId: " + lastItemFoodId, e);
+                            lastID = "01";  // Gán giá trị mặc định nếu có lỗi
+                        }
                     }
                 } else {
-                    lastID = "01";
+                    lastID = "1";  // Gán giá trị mặc định khi không có dữ liệu
                 }
-
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.e("Firebase", "Error retrieving last itemFoodId", databaseError.toException());
             }
         });
     }
+
 
 
 }

@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (isValidUser) {
                     // Chuyển đến activity tiếp theo hoặc thực hiện hành động đăng nhập thành công
                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, AddFoodActivity.class);
                     startActivity(intent);
                 } else {
                     // Thông báo đăng nhập thất bại
