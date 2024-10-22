@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cse441_project.Home.AddFoodActivity;
+import com.example.cse441_project.Home.HomeActivity;
 import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.Model.Employee;
 import com.example.cse441_project.R;
@@ -24,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class IntroActivity extends AppCompatActivity {
 
@@ -40,7 +43,7 @@ public class IntroActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
         startbtn = findViewById(R.id.btnStart);
-//        Test2();
+        autoLogin();
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,25 +91,58 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-public void addEmployeeToFirestore(Employee employee) {
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+//public void addEmployeeToFirestore(Employee employee) {
+//    FirebaseFirestore db = FirebaseFirestore.getInstance();
+//
+//    // Tạo document với employeeId làm tên document
+//    db.collection("Employees").document(employee.getEmployeeId())
+//            .set(employee.toMap())
+//            .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                @Override
+//                public void onSuccess(Void aVoid) {
+//                    // Thành công
+//                    Log.d("Firestore", "Employee added successfully");
+//                }
+//            })
+//            .addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception e) {
+//                    // Thất bại
+//                    Log.w("Firestore", "Error adding employee", e);
+//                }
+//            });
+//}
+    private void autoLogin() {
 
-    // Tạo document với employeeId làm tên document
-    db.collection("Employees").document(employee.getEmployeeId())
-            .set(employee.toMap())
-            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    // Thành công
-                    Log.d("Firestore", "Employee added successfully");
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    // Thất bại
-                    Log.w("Firestore", "Error adding employee", e);
-                }
-            });
-}
+        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+        String username = sharedPreferences.getString("username", null);
+        String password = sharedPreferences.getString("password", null);
+        if(username == null|| password==null)   return;
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+
+        db.collection("Employees")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Employee employee = document.toObject(Employee.class);
+                            if (employee != null) {
+                                String usernameFromDb = employee.getUsername(); // Lấy username từ đối tượng Employee
+                                String passwordFromDb = employee.getPassword(); // Lấy password từ đối tượng Employee
+
+                                if (username.equals(usernameFromDb) && password.equals(passwordFromDb)) {
+
+                                    Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(this, HomeActivity.class);
+                                    startActivity(intent);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                });
+    }
 }

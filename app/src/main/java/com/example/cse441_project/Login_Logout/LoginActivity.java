@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-        autoLogin();
         edtUser = findViewById(R.id.edtUser);
         edtPass = findViewById(R.id.edtPass);
         // Khởi tạo nút đăng nhập và thiết lập sự kiện click
@@ -50,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
                 // Lấy username và password từ EditText
                 UserName = edtUser.getText().toString().trim();
                 PassWorld = edtPass.getText().toString().trim();
-
-                // Kiểm tra xem username và password có rỗng không
                 if (UserName.isEmpty() || PassWorld.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Username và Password không được để trống!", Toast.LENGTH_SHORT).show();
                     return;
@@ -93,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (isValidUser) {
                             // Chuyển đến activity tiếp theo hoặc thực hiện hành động đăng nhập thành công
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, AddFoodActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
                         } else {
                             // Thông báo đăng nhập thất bại
@@ -118,43 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("password", password);
         editor.apply();
     }
-    private void autoLogin() {
 
-        SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        String username = sharedPreferences.getString("username", null);
-        String password = sharedPreferences.getString("password", null);
-        if(username == null|| password==null)   return;
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
-        db.collection("Employees")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        boolean isValidUser = false;
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Employee employee = document.toObject(Employee.class);
-                            if (employee != null) {
-                                String usernameFromDb = employee.getUsername(); // Lấy username từ đối tượng Employee
-                                String passwordFromDb = employee.getPassword(); // Lấy password từ đối tượng Employee
-
-                                if (username.equals(usernameFromDb) && password.equals(passwordFromDb)) {
-                                    isValidUser = true;
-                                    saveLoginCredentials(UserName, PassWorld);
-                                    break;
-                                }
-                            }
-                        }
-                        if (isValidUser) {
-
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, AddFoodActivity.class);
-                            startActivity(intent);
-                        }
-                    }
-                });
-    }
 
 
 
