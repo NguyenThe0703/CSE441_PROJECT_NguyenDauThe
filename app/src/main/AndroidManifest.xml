@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +17,15 @@
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
         <activity
+            android:name=".Add_employee"
+            android:exported="false" />
+        <activity
+            android:name=".add_employee"
+            android:exported="false" />
+        <activity
+            android:name=".home_user"
+            android:exported="false" />
+        <activity
             android:name=".Login_Logout.IntroActivity"
             android:exported="true">
             <intent-filter>
@@ -25,23 +34,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <activity
-            android:name=".Login_Logout.LoginActivity">
 
-        </activity>
-        <activity
-            android:name=".Home.HomeActivity">
-
-        </activity>
-        <activity
-        android:name=".Home.AddFoodActivity">
-        </activity>
-
-
-
+        <activity android:name=".Login_Logout.LoginActivity" />
+        <activity android:name=".Home.HomeActivity" />
+        <activity android:name=".Home.AddFoodActivity" />
     </application>
 
 </manifest>
