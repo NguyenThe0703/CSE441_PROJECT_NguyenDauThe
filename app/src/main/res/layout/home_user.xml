@@ -26,7 +26,7 @@
         android:layout_width="408dp"
         android:layout_height="66dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/F5DFDFFF"
+        android:backgroundTint="@color/pink_100"
         android:fontFamily="@font/inter"
         android:text="Thông tin cá nhân"
         android:textAlignment="viewStart"
@@ -42,14 +42,14 @@
         android:layout_width="408dp"
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="@color/F5DFDFFF"
+        android:backgroundTint="@color/pink_100"
         android:fontFamily="@font/inter"
         android:text="Đăng xuất"
         android:textAlignment="viewStart"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_info" />
 
@@ -62,8 +62,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Personal Info and Logout buttons -->
-
-    <!-- Bottom Navigation (Home & Account) -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

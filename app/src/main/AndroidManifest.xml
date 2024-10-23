@@ -40,7 +40,9 @@
         android:name=".Home.AddFoodActivity">
         </activity>
 
-
+        <activity
+            android:name=".Home.HomeUser">
+        </activity>
 
     </application>
 

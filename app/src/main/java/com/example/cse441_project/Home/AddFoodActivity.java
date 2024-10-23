@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -13,23 +12,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cse441_project.Home.HomeActivity;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +47,7 @@ public class AddFoodActivity extends AppCompatActivity {
         listCategoryName = findViewById(R.id.listCategoryname);
         price = findViewById(R.id.price);
         foodName = findViewById(R.id.foodName);
-        addFood = findViewById(R.id.addFood);
+        addFood = findViewById(R.id.updateFood);
         cancel = findViewById(R.id.cancel);
         image = findViewById(R.id.imageFood);
 
