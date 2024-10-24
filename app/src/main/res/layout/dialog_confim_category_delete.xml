@@ -29,10 +29,10 @@
             android:id="@+id/dialog_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bạn có chắc chắn muốn xóa thư mục này không"
-            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal" />
+            android:text="Bạn có chắc chắn muốn xóa danh mục này không"
+            android:textSize="16sp" />
 
         <!-- LinearLayout để chứa hai nút -->
         <LinearLayout

@@ -57,36 +57,36 @@ public class IntroActivity extends AppCompatActivity {
             return insets;
         });
     }
-    private void Test2() {
-        // Khởi tạo FirebaseFirestore
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        // Tạo đối tượng MenuCategory với ID tự động tạo bằng phương thức .document()
-        DocumentReference newID = db.collection("Category").document();
-        Category menuCategory = new Category(newID.getId(), "Đồ ăn vặt");
-
-        // Kiểm tra xem dữ liệu có tồn tại không
-        newID.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                DocumentSnapshot document = task.getResult();
-                if (document.exists()) {
-                    // Dữ liệu đã tồn tại
-                    Log.d("Firestore", "Data already exists, not pushing");
-                } else {
-                    // Dữ liệu chưa tồn tại, đẩy dữ liệu lên Firestore
-                    newID.set(menuCategory)
-                            .addOnSuccessListener(aVoid -> {
-                                Log.d("Firestore", "Data pushed successfully");
-                            })
-                            .addOnFailureListener(e -> {
-                                Log.e("Firestore", "Error pushing data", e);
-                            });
-                }
-            } else {
-                Log.e("Firestore", "Error checking document existence", task.getException());
-            }
-        });
-    }
+//    private void Test2() {
+//        // Khởi tạo FirebaseFirestore
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//
+//        // Tạo đối tượng MenuCategory với ID tự động tạo bằng phương thức .document()
+//        DocumentReference newID = db.collection("Category").document();
+//        Category menuCategory = new Category(newID.getId(), "Đồ ăn vặt");
+//
+//        // Kiểm tra xem dữ liệu có tồn tại không
+//        newID.get().addOnCompleteListener(task -> {
+//            if (task.isSuccessful()) {
+//                DocumentSnapshot document = task.getResult();
+//                if (document.exists()) {
+//                    // Dữ liệu đã tồn tại
+//                    Log.d("Firestore", "Data already exists, not pushing");
+//                } else {
+//                    // Dữ liệu chưa tồn tại, đẩy dữ liệu lên Firestore
+//                    newID.set(menuCategory)
+//                            .addOnSuccessListener(aVoid -> {
+//                                Log.d("Firestore", "Data pushed successfully");
+//                            })
+//                            .addOnFailureListener(e -> {
+//                                Log.e("Firestore", "Error pushing data", e);
+//                            });
+//                }
+//            } else {
+//                Log.e("Firestore", "Error checking document existence", task.getException());
+//            }
+//        });
+//    }
 
 public void addEmployeeToFirestore(Employee employee) {
     FirebaseFirestore db = FirebaseFirestore.getInstance();

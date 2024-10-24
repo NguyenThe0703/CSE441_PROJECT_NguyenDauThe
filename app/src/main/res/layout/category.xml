@@ -30,20 +30,23 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scCategory"
         android:layout_width="match_parent"
-        android:layout_height="575dp"
+        android:layout_height="577dp"
         android:background="@android:color/white"
         android:fillViewport="true">
 
         <LinearLayout
+            android:id="@+id/LiCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
             <GridLayout
+                android:id="@+id/grCategory"
                 android:layout_width="match_parent"
-                android:layout_height="523dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:columnCount="2"
@@ -52,30 +55,35 @@
 
                 <!-- Card 1 -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:id="@+id/category_card"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
+                    android:orientation="vertical"
+                    android:layout_margin="16dp"
                     android:background="@color/pink_100"
                     android:gravity="center"
-                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
                     android:padding="16dp">
 
                     <ImageView
+                        android:id="@+id/imvCategory"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@drawable/rice" />
 
                     <TextView
+                        android:id="@+id/txtcategoryName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textSize="20sp"
                         android:text="Cơm"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
 
                     <LinearLayout
+                        android:id="@+id/liCategoryBtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -83,247 +91,49 @@
                         android:orientation="horizontal">
 
                         <Button
+                            android:id="@+id/btnEdit"
                             android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_height="match_parent"
                             android:layout_marginEnd="20dp"
                             android:background="@drawable/edit"
                             android:backgroundTint="@android:color/white" />
 
 
                         <Button
+                            android:id="@+id/btnDelete"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_marginStart="20dp"
                             android:background="@drawable/delete"
-                            android:backgroundTint="@color/white"
-                            />
+                            android:backgroundTint="@color/white" />
 
                     </LinearLayout>
                 </LinearLayout>
 
-                <!-- Card 2 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    android:background="@color/pink_100"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/rice" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textSize="20sp"
-                        android:text="Cơm"
-                        android:textStyle="bold" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="@drawable/edit"
-                            android:backgroundTint="@android:color/white" />
-
-
-                        <Button
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="20dp"
-                            android:background="@drawable/delete"
-                            android:backgroundTint="@color/white"
-                            />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- Card 3 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    android:background="@color/pink_100"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/rice" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textSize="20sp"
-                        android:text="Cơm"
-                        android:textStyle="bold" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="@drawable/edit"
-                            android:backgroundTint="@android:color/white" />
-
-
-                        <Button
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="20dp"
-                            android:background="@drawable/delete"
-                            android:backgroundTint="@color/white"
-                            />
-
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- Card 4 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="8dp"
-                    android:background="@color/pink_100"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/rice" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textSize="20sp"
-                        android:text="Cơm"
-                        android:textStyle="bold" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginEnd="20dp"
-                            android:background="@drawable/edit"
-                            android:backgroundTint="@android:color/white" />
-
-
-                        <Button
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="20dp"
-                            android:background="@drawable/delete"
-                            android:backgroundTint="@color/white"
-                            />
-
-                    </LinearLayout>
-                </LinearLayout>
             </GridLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="95dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnAddCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:backgroundTint="@color/red_500"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="Thêm danh mục"
+                    android:textColor="@android:color/white"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@android:color/white">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/red_500"
-            android:drawablePadding="8dp"
-            android:padding="16dp"
-            android:text="Thêm danh mục"
-            android:textColor="@android:color/white"
-            android:textSize="20dp" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/red_500"
-        android:padding="16dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/home" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Trang chủ"
-                android:textColor="@android:color/white"
-                android:gravity="center" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/vetor" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tài khoản"
-                android:textColor="@android:color/white"
-                android:gravity="center" />
-        </LinearLayout>
-    </LinearLayout>
 </LinearLayout>

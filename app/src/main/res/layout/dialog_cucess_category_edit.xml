@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:text="Xóa danh mục thành công"
+            android:text="Sửa thư mục thành công"
             android:textSize="16sp" />
 
         <!-- Nút OK -->

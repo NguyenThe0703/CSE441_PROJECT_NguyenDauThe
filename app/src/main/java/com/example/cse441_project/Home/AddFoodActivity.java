@@ -34,7 +34,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddFoodActivity extends AppCompatActivity {
+public class  AddFoodActivity extends AppCompatActivity {
     private AutoCompleteTextView listCategoryName;
     private EditText price, foodName;
     private Button addFood;
