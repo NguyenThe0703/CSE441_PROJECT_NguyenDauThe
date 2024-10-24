@@ -17,6 +17,9 @@
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
         <activity
+            android:name=".User_information_activity"
+            android:exported="false" />
+        <activity
             android:name=".FormEmployeeActivity"
             android:exported="false" />
         <activity
