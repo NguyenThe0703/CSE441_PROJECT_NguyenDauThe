@@ -94,11 +94,18 @@ public class AddFoodActivity extends AppCompatActivity {
             return;
         }
 
+        // Kiểm tra xem danh mục có tồn tại hay không
+        String categoryId = findCategoryIdByName(selectedCategory);
+        if (categoryId == null) {
+            Toast.makeText(AddFoodActivity.this, "Danh mục không tồn tại!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         try {
             double foodPrice = Double.parseDouble(priceString);
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-            FoodItem foodItem = new FoodItem(lastID, foodItemName, foodPrice, findCategoryIdByName(selectedCategory), imageUrl);
+            FoodItem foodItem = new FoodItem(lastID, foodItemName, foodPrice, categoryId, imageUrl);
 
             // Lưu món ăn vào Firestore
             db.collection("FoodItem").document(lastID).set(foodItem)
