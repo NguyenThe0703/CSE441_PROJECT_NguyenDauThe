@@ -51,7 +51,14 @@
             android:name=".Home.DeleteFood">
 
         </activity>
+        <activity
+            android:name=".Home.RevenueActivity">
 
+        </activity>
+        <activity
+            android:name=".Home.HomeUser">
+
+        </activity>
 
     </application>
 

@@ -105,7 +105,7 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_top_selling_items) {
                     startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
                 } else if (item.getItemId() == R.id.nav_revenue_statistics) {
-                    startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
+                    startActivity(new Intent(HomeActivity.this, RevenueActivity.class));
                 } else {
                     Toast.makeText(HomeActivity.this, "Item không xác định", Toast.LENGTH_SHORT).show();
                 }

@@ -23,7 +23,7 @@
 
     <Button
         android:id="@+id/my_info"
-        android:layout_width="408dp"
+        android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/pink_100"
@@ -39,7 +39,7 @@
 
     <Button
         android:id="@+id/log_out"
-        android:layout_width="408dp"
+        android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/pink_100"

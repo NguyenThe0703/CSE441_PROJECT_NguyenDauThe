@@ -21,13 +21,21 @@ import com.example.cse441_project.R;
 
 public class HomeFragment extends Fragment {
     private ImageView btn_user;
+    private ImageView btn_home;
     @Nullable
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
         btn_user = view.findViewById(R.id.btn_user);
-
+        btn_home = view.findViewById(R.id.btn_home);
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                startActivity(intent);
+            }
+        });
         btn_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
