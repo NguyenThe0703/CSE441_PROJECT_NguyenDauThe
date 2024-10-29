@@ -6,26 +6,6 @@
     android:layout_height="match_parent"
     android:background="#F07D2A">
 
-    <EditText
-        android:id="@+id/edtPass"
-        android:layout_width="355dp"
-        android:layout_height="72dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="28dp"
-        android:background="@drawable/rounded_edit_text"
-        android:ems="10"
-        android:inputType="text"
-        android:padding="16dp"
-        android:text="Mật khẩu"
-        android:textColor="#292424"
-
-        android:textColorHint="#FFFFFF"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtUser" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
@@ -59,16 +39,16 @@
         android:layout_width="355dp"
         android:layout_height="72dp"
         android:layout_marginStart="28dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="28dp"
         android:background="@drawable/rounded_edit_text"
         android:ems="10"
+        android:hint="Tên đăng nhập"
+
         android:inputType="text"
         android:padding="16dp"
-        android:text="Tên đăng nhập"
         android:textColor="#292323"
-
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#5D5252"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,5 +68,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/edtPass"
+        android:layout_width="355dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="28dp"
+        android:background="@drawable/rounded_edit_text"
+        android:ems="10"
+        android:hint="Mật khẩu"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:textColor="#292323"
+        android:textColorHint="#5D5252"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtUser" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
