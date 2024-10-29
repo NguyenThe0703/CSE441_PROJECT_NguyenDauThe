@@ -4,7 +4,9 @@ package com.example.cse441_project.Home;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -68,9 +70,34 @@ public class HomeActivity extends AppCompatActivity {
         });
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
+
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.nav_manage_food) {
-                    startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
+                    View view = findViewById(R.id.nav_manage_food);
+                    PopupMenu popupMenu = new PopupMenu(HomeActivity.this, view);
+                    popupMenu.getMenuInflater().inflate(R.menu.sub_menu, popupMenu.getMenu());
+
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem submenuItem) {
+                            if (submenuItem.getItemId() == R.id.add) {
+                                startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
+                                return true;
+                            } else if (submenuItem.getItemId() == R.id.edit) {
+                                startActivity(new Intent(HomeActivity.this, SearchEditFood.class));
+
+                                return true;
+                            } else if (submenuItem.getItemId() == R.id.delete) {
+                                startActivity(new Intent(HomeActivity.this, DeleteFood.class));
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    });
+
+                    popupMenu.show();
+
                 } else if (item.getItemId() == R.id.nav_manage_food_type) {
                     startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_table) {
@@ -83,7 +110,7 @@ public class HomeActivity extends AppCompatActivity {
                     Toast.makeText(HomeActivity.this, "Item không xác định", Toast.LENGTH_SHORT).show();
                 }
 
-                drawerLayout.closeDrawer(GravityCompat.START); // Đóng ngăn kéo sau khi chọn
+//                drawerLayout.closeDrawer(GravityCompat.START); // Đóng ngăn kéo sau khi chọn
                 return true; // Trả về true để xác nhận sự kiện đã được xử lý
             }
         });

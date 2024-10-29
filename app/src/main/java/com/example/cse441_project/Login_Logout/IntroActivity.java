@@ -53,7 +53,7 @@ public class IntroActivity extends AppCompatActivity {
         });
 
 
-
+        Test2();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -68,7 +68,7 @@ public class IntroActivity extends AppCompatActivity {
         DocumentReference newID = db.collection("Category").document();
         Category menuCategory = new Category(newID.getId(), "Đồ ăn vặt");
 
-        // Kiểm tra xem dữ liệu có tồn tại không
+
         newID.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();

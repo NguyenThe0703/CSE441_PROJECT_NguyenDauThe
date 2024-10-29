@@ -39,7 +39,18 @@
         <activity
         android:name=".Home.AddFoodActivity">
         </activity>
+        <activity
+            android:name=".Home.SearchEditFood">
 
+        </activity>
+        <activity
+            android:name=".Home.EditFood">
+
+        </activity>
+        <activity
+            android:name=".Home.DeleteFood">
+
+        </activity>
 
 
     </application>
