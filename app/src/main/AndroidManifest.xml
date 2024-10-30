@@ -59,6 +59,10 @@
             android:name=".Home.HomeUser">
 
         </activity>
+        <activity
+            android:name=".Home.TopSaleActivity">
+
+        </activity>
 
     </application>
 

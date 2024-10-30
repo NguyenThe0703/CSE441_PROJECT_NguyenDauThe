@@ -103,7 +103,7 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_manage_table) {
                     startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
                 } else if (item.getItemId() == R.id.nav_top_selling_items) {
-                    startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
+                    startActivity(new Intent(HomeActivity.this, TopSaleActivity.class));
                 } else if (item.getItemId() == R.id.nav_revenue_statistics) {
                     startActivity(new Intent(HomeActivity.this, RevenueActivity.class));
                 } else {
