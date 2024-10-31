@@ -184,7 +184,7 @@ public class IntroActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-        db.collection("Employees")
+        db.collection("Employee")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Lấy tất cả người dùng từ collection "employees"
-        db.collection("Employees")
+        db.collection("Employee")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
