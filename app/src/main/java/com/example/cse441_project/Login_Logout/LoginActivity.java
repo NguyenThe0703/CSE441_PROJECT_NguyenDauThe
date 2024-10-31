@@ -76,12 +76,12 @@ public class LoginActivity extends AppCompatActivity {
                             if (employee != null) {
                                 String usernameFromDb = employee.getUsername(); // Lấy username từ đối tượng Employee
                                 String passwordFromDb = employee.getPassword(); // Lấy password từ đối tượng Employee
-
+                                String idFromDb = employee.getEmployeeId();
                                 if (UserName.equals(usernameFromDb) && PassWorld.equals(passwordFromDb)) {
                                     isValidUser = true;
 
                                     // Lưu thông tin đăng nhập vào SharedPreferences
-                                    saveLoginCredentials(UserName, PassWorld);
+                                    saveLoginCredentials(UserName, PassWorld,idFromDb);
 
                                     break;
                                 }
@@ -108,11 +108,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // Phương thức để lưu thông tin đăng nhập
-    private void saveLoginCredentials(String username, String password) {
+    private void saveLoginCredentials(String username, String password,String id) {
         SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("username", username);
         editor.putString("password", password);
+        editor.putString("employeeId", id);
         editor.apply();
     }
 
