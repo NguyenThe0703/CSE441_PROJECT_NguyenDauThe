@@ -201,5 +201,4 @@ public class AddFoodActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.e("Firestore", "Error retrieving last itemFoodId", e));
     }
 
-
 }

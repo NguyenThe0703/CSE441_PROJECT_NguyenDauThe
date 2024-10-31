@@ -22,12 +22,8 @@
         <activity
             android:name=".FormEmployeeActivity"
             android:exported="false" />
-        <activity
-            android:name=".Add_employee"
-            android:exported="false" />
-        <activity
-            android:name=".add_employee"
-            android:exported="false" />
+
+
         <activity
             android:name=".home_user"
             android:exported="false" />
@@ -48,6 +44,7 @@
         <activity android:name=".Login_Logout.LoginActivity" />
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".Home.AddFoodActivity" />
+        <activity android:name=".DauThe.ActivityFormEmployee" />
     </application>
 
 </manifest>
