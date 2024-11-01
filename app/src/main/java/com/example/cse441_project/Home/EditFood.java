@@ -15,8 +15,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cse441_project.Model.FoodItem;
+import com.bumptech.glide.Glide;
 import com.example.cse441_project.Model.Category;
+import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,13 +26,15 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class  AddFoodActivity extends AppCompatActivity {
+public class EditFood extends AppCompatActivity {
     private AutoCompleteTextView listCategoryName;
     private EditText price, foodName;
-    private Button addFood;
+    private Button updateFood;
     private Button cancel;
     private ImageView image;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -39,29 +42,52 @@ public class  AddFoodActivity extends AppCompatActivity {
     List<String> categoryNames = new ArrayList<>();
     private Uri imageUri;
     private String lastID;
-
+    private String categoryName;
+    private FoodItem foodItem;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_food_activity);
+        setContentView(R.layout.edit_food_activity);
         listCategoryName = findViewById(R.id.listCategoryname);
         price = findViewById(R.id.price);
         foodName = findViewById(R.id.foodName);
-        addFood = findViewById(R.id.editFood);
+        updateFood = findViewById(R.id.editFood);
         cancel = findViewById(R.id.cancel);
         image = findViewById(R.id.imageFood);
 
-        GetCategoriesFromFirestore();  // Lấy dữ liệu từ Firestore
-        getLastItemFoodId();  // Lấy ID món ăn cuối cùng
+
+        foodItem = getIntent().getParcelableExtra("foodItem");
+        if (foodItem != null) {
+            populateFoodDetails(foodItem);
+        }else
+        {
+            Toast.makeText(this, "Lỗi", Toast.LENGTH_SHORT).show();
+        }
+
         image.setOnClickListener(v -> openGallery());
 
-        addFood.setOnClickListener(v -> uploadImageToFirebaseStorage(imageUri));
+        GetCategoriesFromFirestore();
+
+        updateFood.setOnClickListener(v -> uploadImageToFirebaseStorage(imageUri));
     }
 
-    // Hàm tải hình ảnh lên Firebase Storage
+    private void populateFoodDetails(FoodItem foodItem) {
+        getCategoryById(foodItem.getCategoryId());
+
+        foodName.setText(foodItem.getFoodName());
+
+        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
+        String formattedPrice = numberFormat.format(foodItem.getPrice());
+        price.setText(formattedPrice);
+
+        Glide.with(this)
+                .load(foodItem.getImageUrl())
+                .into(image);
+    }
+
     private void uploadImageToFirebaseStorage(Uri imageUri) {
         if (imageUri == null) {
-            Toast.makeText(AddFoodActivity.this, "Vui lòng chọn ảnh trước khi thêm món ăn!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditFood.this, "Vui lòng chọn ảnh trước khi thêm món ăn!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -71,51 +97,71 @@ public class  AddFoodActivity extends AppCompatActivity {
 
         imageRef.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl().addOnSuccessListener(downloadUrl -> {
-                    // Lưu URL của hình ảnh vào Firestore
+
                     saveFoodToFirestore(downloadUrl.toString());
                 }))
-                .addOnFailureListener(e -> Toast.makeText(AddFoodActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(EditFood.this, "Failed to upload image", Toast.LENGTH_SHORT).show());
     }
 
-    // Hàm lưu món ăn vào Firestore
+
     private void saveFoodToFirestore(String imageUrl) {
+
         String selectedCategory = listCategoryName.getText().toString();
         String foodItemName = foodName.getText().toString();
         String priceString = price.getText().toString();
 
         if (selectedCategory.isEmpty() || foodItemName.isEmpty() || priceString.isEmpty()) {
-            Toast.makeText(AddFoodActivity.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditFood.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-
-        String categoryId = findCategoryIdByName(selectedCategory);
-        if (categoryId == null) {
-            Toast.makeText(AddFoodActivity.this, "Danh mục không tồn tại!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        // Kiểm tra xem danh mục có tồn tại hay không
 
         try {
             double foodPrice = Double.parseDouble(priceString);
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            FoodItem foodItem = new FoodItem(lastID, foodItemName, foodPrice, categoryId, imageUrl);
+            String id = foodItem.getItemFoodID();
+            String idCategory = foodItem.getCategoryId();
+            FoodItem foodItem = new FoodItem(id, foodItemName, foodPrice, idCategory, imageUrl);
 
             // Lưu món ăn vào Firestore
-            db.collection("FoodItem").document(lastID).set(foodItem)
+            db.collection("FoodItem").document(id).set(foodItem)
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(AddFoodActivity.this, "Món ăn đã được thêm thành công!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AddFoodActivity.this, HomeActivity.class);
+                        Toast.makeText(EditFood.this, "Món ăn đã được thêm thành công!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(EditFood.this, HomeActivity.class);
                         startActivity(intent);
                     })
-                    .addOnFailureListener(e -> Toast.makeText(AddFoodActivity.this, "Lỗi khi lưu món ăn!", Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> Toast.makeText(EditFood.this, "Lỗi khi lưu món ăn!", Toast.LENGTH_SHORT).show());
         } catch (NumberFormatException e) {
-            Toast.makeText(AddFoodActivity.this, "Giá tiền không hợp lệ!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditFood.this, "Giá tiền không hợp lệ!", Toast.LENGTH_SHORT).show();
         }
     }
 
 
-    // Lấy danh mục từ Firestore
+    private void getCategoryById(String categoryId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Category").document(categoryId).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        Category category = documentSnapshot.toObject(Category.class);
+                        if (category != null) {
+                            categoryName = category.getCategoryName();
+                            // Cập nhật UI hoặc thông tin liên quan tại đây
+                            runOnUiThread(() -> {
+                                listCategoryName.setText(categoryName);
+                            });
+                        } else {
+                            Log.e("Firestore", "Category object is null!");
+                        }
+                    } else {
+                        Log.e("Firestore", "No such category exists with ID: " + categoryId);
+                    }
+                })
+                .addOnFailureListener(e -> Log.e("Firestore", "Error retrieving data: " + e.getMessage()));
+    }
+
+
+
     private void GetCategoriesFromFirestore() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Category").get()
@@ -137,23 +183,13 @@ public class  AddFoodActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> Log.e("Firestore", "Error retrieving data", e));
     }
 
-    // Tìm ID của danh mục theo tên
-    public String findCategoryIdByName(String categoryName) {
-        for (Category category : this.category) {
-            if (category.getCategoryName().equals(categoryName)) {
-                return category.getCategoryId();
-            }
-        }
-        return null;
-    }
-
     // Mở thư viện ảnh
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
-    // Lấy URI của hình ảnh được chọn
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -168,38 +204,4 @@ public class  AddFoodActivity extends AppCompatActivity {
             }
         }
     }
-
-    // Lấy ID món ăn cuối cùng từ Firestore
-// Lấy ID món ăn cuối cùng từ Firestore
-    private void getLastItemFoodId() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        // Truy vấn Firestore, sắp xếp theo trường "itemFoodID" giảm dần và lấy phần tử đầu tiên (lớn nhất)
-        db.collection("FoodItem").orderBy("itemFoodID", Query.Direction.DESCENDING).limit(1)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    if (!queryDocumentSnapshots.isEmpty()) {
-                        // Lấy tài liệu đầu tiên
-                        DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
-
-                        // Lấy giá trị của trường "itemFoodID" từ tài liệu
-                        String lastItemFoodId = document.getString("itemFoodID");
-
-                        try {
-                            // Chuyển đổi ID thành số nguyên
-                            int id = Integer.parseInt(lastItemFoodId);
-                            id += 1;  // Tăng giá trị ID lên 1
-                            lastID = String.format("%03d", id); // Định dạng ID với 3 chữ số (có thể điều chỉnh tùy theo nhu cầu)
-
-                        } catch (NumberFormatException e) {
-                            Log.e("Firestore", "Error parsing last itemFoodId: " + lastItemFoodId, e);
-                            lastID = "001";  // Gán giá trị mặc định nếu có lỗi
-                        }
-                    } else {
-                        lastID = "001";  // Gán giá trị mặc định nếu không có tài liệu nào
-                    }
-                })
-                .addOnFailureListener(e -> Log.e("Firestore", "Error retrieving last itemFoodId", e));
-    }
-
 }

@@ -12,23 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="381dp"
-            android:layout_height="409dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="1dp"
-            app:layout_constraintBottom_toTopOf="@+id/home_fragment"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginTop="32dp"
+            android:layout_width="412dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="36dp"
             android:background="#E83E3E"
             android:fontFamily="@font/inter_bold"
             android:text="Trang Chủ"
@@ -36,18 +24,30 @@
             android:textColor="#FFFFFF"
             android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/menu_img"
-            android:layout_width="29dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="36dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/menu_pic" />
+
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/home_fragment"
+            android:name="com.example.cse441_project.Home.HomeFragment"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginBottom="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"
@@ -92,42 +92,20 @@
 
         </LinearLayout>
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/home_fragment"
-            android:name="com.example.cse441_project.Home.HomeFragment"
-            android:layout_width="match_parent"
-            android:layout_height="90dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="409dp"
+            android:layout_height="494dp"
             android:layout_marginStart="1dp"
             android:layout_marginTop="1dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/home_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcv_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/home_fragment"
-        app:menu="@menu/menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
