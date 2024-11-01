@@ -71,15 +71,13 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         boolean isValidUser = false;
-
                         // Duyệt qua các tài liệu trong collection
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Employee employee = document.toObject(Employee.class);
-
                             if (employee != null) {
                                 String usernameFromDb = employee.getUsername(); // Lấy username từ đối tượng Employee
                                 String passwordFromDb = employee.getPassword(); // Lấy password từ đối tượng Employee
-
+                                Toast.makeText(LoginActivity.this, usernameFromDb + passwordFromDb, Toast.LENGTH_SHORT).show();
                                 if (UserName.equals(usernameFromDb) && PassWorld.equals(passwordFromDb)) {
                                     isValidUser = true;
 

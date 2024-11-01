@@ -17,20 +17,22 @@
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
         <activity
-            android:name=".Category.CategoryEditActivity"
+            android:name=".Order.InvoiceActivity"
             android:exported="false" />
         <activity
-            android:name=".Category.CategoryAddActivity"
+            android:name=".Order.OrderActivity"
             android:exported="false" />
         <activity
-            android:name=".Category.CategoryActivity"
+            android:name=".Order.TableListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Login_Logout.IntroActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -38,7 +40,18 @@
 
         <activity android:name=".Login_Logout.LoginActivity" />
         <activity android:name=".Home.HomeActivity" />
-        <activity android:name=".Home.AddFoodActivity" />
+        <activity
+            android:name=".Home.AddFoodActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Login_Logout.RegisterAdmin"
+            android:exported="true">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
     </application>
 
 </manifest>
