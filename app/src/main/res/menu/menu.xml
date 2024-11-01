@@ -9,7 +9,8 @@
         android:title="Quản lý loại món ăn" />
     <item
         android:id="@+id/nav_manage_table"
-        android:title="Quản lý bàn" />
+        android:title="Quản lý bàn"
+        />
 
     <item
         android:id="@+id/nav_top_selling_items"
