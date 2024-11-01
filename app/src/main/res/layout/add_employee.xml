@@ -1,4 +1,5 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -33,27 +34,18 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Employee ID -->
-    <EditText
-        android:id="@+id/et_employee_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Mã nhân viên"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/tv_info_heading"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Username -->
     <EditText
         android:id="@+id/et_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="73dp"
         android:hint="Tên đăng nhập"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_employee_id" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_info_heading" />
 
     <!-- Password -->
     <EditText
@@ -67,14 +59,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_username" />
 
-    <!-- Role -->
-    <EditText
-        android:id="@+id/et_role"
+    <!-- Role (Spinner) -->
+    <Spinner
+        android:id="@+id/sp_role"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Phân quyền"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_password" />
@@ -89,10 +79,10 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_role" />
+        app:layout_constraintTop_toBottomOf="@id/sp_role" />
 
     <!-- Gender -->
-    <EditText
+    <Spinner
         android:id="@+id/et_gender"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

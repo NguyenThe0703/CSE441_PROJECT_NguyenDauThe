@@ -45,6 +45,7 @@
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".Home.AddFoodActivity" />
         <activity android:name=".DauThe.ActivityFormEmployee" />
+        <activity android:name=".DauThe.AddEmployee" />
     </application>
 
 </manifest>
