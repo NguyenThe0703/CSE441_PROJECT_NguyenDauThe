@@ -95,10 +95,18 @@ public class TableListActivity extends AppCompatActivity {
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Hiển thị thông báo
                 Toast.makeText(TableListActivity.this, "Gọi món", Toast.LENGTH_SHORT).show();
-                // Thêm logic gọi món tại đây
+
+                // Chuyển đến OrderActivity
+                Intent intent = new Intent(TableListActivity.this, OrderActivity.class);
+                // Bạn có thể thêm dữ liệu vào intent nếu cần
+                // intent.putExtra("key", value);
+
+                startActivity(intent);
             }
         });
+
 
         // Xử lý nút Xem hóa đơn
         viewInvoiceButton.setOnClickListener(new View.OnClickListener() {

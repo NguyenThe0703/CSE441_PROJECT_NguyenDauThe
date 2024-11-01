@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cse441_project.Category.CategoryActivity;
 import com.example.cse441_project.Model.Category;
+import com.example.cse441_project.Order.TableListActivity;
 import com.example.cse441_project.R;
 
 import com.example.cse441_project.Model.FoodItem;
@@ -117,7 +118,7 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_manage_food_type) {
                     startActivity(new Intent(HomeActivity.this, CategoryActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_table) {
-                    startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
+                    startActivity(new Intent(HomeActivity.this, TableListActivity.class));
                 } else if (item.getItemId() == R.id.nav_top_selling_items) {
                     startActivity(new Intent(HomeActivity.this, TopSaleActivity.class));
                 } else if (item.getItemId() == R.id.nav_revenue_statistics) {
