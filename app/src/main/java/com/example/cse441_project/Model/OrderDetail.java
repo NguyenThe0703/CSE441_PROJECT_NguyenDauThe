@@ -10,9 +10,9 @@ public class OrderDetail {
     }
 
     // Constructor with parameters
-    public OrderDetail(String orderId, String menuItemId, int quantity) {
+    public OrderDetail(String orderId, String itemFoodID, int quantity) {
         this.orderId = orderId;
-        this.itemFoodID = menuItemId;
+        this.itemFoodID = itemFoodID;
         this.quantity = quantity;
     }
 
@@ -26,12 +26,12 @@ public class OrderDetail {
     }
 
     // Getter and setter for menuItemId (MaThucDon)
-    public String getMenuItemId() {
+    public String getItemFoodID() {
         return itemFoodID;
     }
 
-    public void setMenuItemId(String menuItemId) {
-        this.itemFoodID = menuItemId;
+    public void setItemFoodID(String itemFoodID) {
+        this.itemFoodID = itemFoodID;
     }
 
     // Getter and setter for quantity (SoLuong)
@@ -43,4 +43,3 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 }
-

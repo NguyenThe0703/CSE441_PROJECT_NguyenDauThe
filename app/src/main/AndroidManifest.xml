@@ -28,7 +28,7 @@
             android:name=".home_user"
             android:exported="false" />
         <activity
-            android:name=".Login_Logout.IntroActivity"
+            android:name=".DauThe.UpdateInfoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,6 +48,7 @@
         <activity android:name=".DauThe.AddEmployee" />
         <activity android:name=".DauThe.MyInfoActivity" />
         <activity android:name=".DauThe.EmployeeDetailsActivity" />
+
     </application>
 
 </manifest>
