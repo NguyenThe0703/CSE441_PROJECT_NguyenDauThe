@@ -3,6 +3,7 @@ package com.example.cse441_project.Home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,7 +23,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.R;
 
 import com.example.cse441_project.Model.FoodItem;
@@ -34,12 +38,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView,rcvCategory;
     private HomeAdapter adapter;
     private List<FoodItem> foodItemList;
     private DrawerLayout drawerLayout;
+    private CategoryAdapter categoryAdapter;
     private NavigationView navigationView;
     private ImageView imgMenu;
+    private List<Category> categoryList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +54,14 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        rcvCategory = findViewById(R.id.rcv_category);
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
+
+        rcvCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+
         imgMenu = findViewById(R.id.menu_img);
 
         loadFoodItemsFromFirestore();
@@ -57,6 +69,9 @@ public class HomeActivity extends AppCompatActivity {
         foodItemList = new ArrayList<>();
         adapter = new HomeAdapter(foodItemList);
         recyclerView.setAdapter(adapter);
+        fetchCategoriesFromFirestore();
+        categoryAdapter = new CategoryAdapter(categoryList);
+        rcvCategory.setAdapter(categoryAdapter);
 
         if (savedInstanceState == null) {
             addFragment(new HomeFragment());
@@ -144,6 +159,19 @@ public class HomeActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     Toast.makeText(HomeActivity.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+    }
+    private void fetchCategoriesFromFirestore() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Category")
+                .get()
+                .addOnSuccessListener(querySnapshot -> {
+                    for (QueryDocumentSnapshot document : querySnapshot) {
+                        Category category = document.toObject(Category.class);
+                        categoryList.add(category);
+                    }
+                    categoryAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> Log.e("CategoryActivity", "Error fetching categories", e));
     }
 }
 

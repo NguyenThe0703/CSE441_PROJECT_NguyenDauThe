@@ -3,7 +3,7 @@ package com.example.cse441_project.Model;
 public class Category {
     private String categoryId;   // MaLoai
     private String categoryName; // TenLoai
-
+    private String categoryImage;
 
     public Category() {
     }
@@ -31,5 +31,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public void setImage(String categoryImage) {
+        this.categoryImage = categoryImage;
+    }
+
+    public String getImage() {
+        return categoryImage;
     }
 }

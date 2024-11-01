@@ -28,9 +28,11 @@ public class TopSaleActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.top_sale_activity);
-        fetchTopSellingItems();
+
+
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new HomeAdapter(foodItemList);
+        fetchTopSellingItems();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -45,7 +47,6 @@ public class TopSaleActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : querySnapshot) {
                         String itemFoodID = document.getString("itemFoodID");
                         int quantity = document.getLong("quantity").intValue();
-                        Toast.makeText(TopSaleActivity.this, "2", Toast.LENGTH_SHORT).show();
                         foodSalesCount.put(itemFoodID, foodSalesCount.getOrDefault(itemFoodID, 0) + quantity);
                     }
                     List<String> topSellingFoodIds = foodSalesCount.entrySet().stream()
@@ -53,7 +54,6 @@ public class TopSaleActivity extends AppCompatActivity {
                             .limit(6)
                             .map(Map.Entry::getKey)
                             .collect(Collectors.toList());
-                    Toast.makeText(TopSaleActivity.this, "3", Toast.LENGTH_SHORT).show();
                     fetchFoodDetails(topSellingFoodIds);
                 })
                 .addOnFailureListener(e -> Log.e("TopSaleActivity", "Error fetching order details", e));

@@ -33,7 +33,8 @@
 
         </activity>
         <activity
-            android:name=".Home.HomeActivity">
+            android:name=".Home.HomeActivity"
+            android:exported="false">
 
         </activity>
         <activity
@@ -60,8 +61,8 @@
 
         </activity>
         <activity
-            android:name=".Home.TopSaleActivity">
-
+            android:name=".Home.TopSaleActivity"
+            android:exported="false">
         </activity>
 
     </application>
