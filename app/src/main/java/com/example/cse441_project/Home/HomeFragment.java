@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,13 +21,13 @@ import com.example.cse441_project.Login_Logout.LoginActivity;
 import com.example.cse441_project.R;
 
 public class HomeFragment extends Fragment {
-    private ImageView btn_user;
-    private ImageView btn_home;
+    private LinearLayout btn_user;  // đổi sang LinearLayout
+    private LinearLayout btn_home;  // đổi sang LinearLayout
     @Nullable
     @Override
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.home_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_bottom_navigation, container, false);
         btn_user = view.findViewById(R.id.btn_user);
         btn_home = view.findViewById(R.id.btn_home);
         btn_home.setOnClickListener(new View.OnClickListener() {
