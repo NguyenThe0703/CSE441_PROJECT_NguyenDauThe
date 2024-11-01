@@ -26,6 +26,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.Category.CategoryActivity;
+import com.example.cse441_project.DauThe.ActivityFormEmployee;
 import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.R;
 
@@ -114,13 +116,15 @@ public class HomeActivity extends AppCompatActivity {
                     popupMenu.show();
 
                 } else if (item.getItemId() == R.id.nav_manage_food_type) {
-                    startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
+                    startActivity(new Intent(HomeActivity.this, CategoryActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_table) {
                     startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
                 } else if (item.getItemId() == R.id.nav_top_selling_items) {
                     startActivity(new Intent(HomeActivity.this, TopSaleActivity.class));
                 } else if (item.getItemId() == R.id.nav_revenue_statistics) {
                     startActivity(new Intent(HomeActivity.this, RevenueActivity.class));
+                } else if (item.getItemId() == R.id.nav_manage_employee) {
+                    startActivity(new Intent(HomeActivity.this, ActivityFormEmployee.class));
                 } else {
                     Toast.makeText(HomeActivity.this, "Item không xác định", Toast.LENGTH_SHORT).show();
                 }
@@ -147,11 +151,11 @@ public class HomeActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            // Chuyển đổi tài liệu thành đối tượng FoodItem
+
                             FoodItem foodItem = document.toObject(FoodItem.class);
-                            foodItemList.add(foodItem); // Thêm vào danh sách
+                            foodItemList.add(foodItem);
                         }
-                        adapter.notifyDataSetChanged(); // Cập nhật adapter
+                        adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(HomeActivity.this, "Lỗi khi lấy dữ liệu: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }

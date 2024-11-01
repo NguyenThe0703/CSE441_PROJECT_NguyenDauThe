@@ -36,7 +36,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
         // Sử dụng Glide để tải ảnh từ URL
         Glide.with(holder.imgCategory.getContext())
-                .load(category.getImage()) // URL của ảnh Category
+                .load(category.getCategoryImage()) // URL của ảnh Category
                 .placeholder(R.drawable.ic_launcher_background) // Ảnh hiển thị trong khi tải
                 .error(R.drawable.ic_launcher_background) // Ảnh hiển thị khi có lỗi
                 .into(holder.imgCategory);

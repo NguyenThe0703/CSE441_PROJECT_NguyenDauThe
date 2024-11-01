@@ -45,6 +45,10 @@
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".Home.AddFoodActivity" />
         <activity android:name=".DauThe.ActivityFormEmployee" />
+        <activity android:name=".Category.CategoryActivity" />
+        <activity android:name=".Category.CategoryAddActivity" />
+        <activity android:name=".Category.CategoryEditActivity" />
+        <activity android:name=".Home.TopSaleActivity" />
     </application>
 
 </manifest>

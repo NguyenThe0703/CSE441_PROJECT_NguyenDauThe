@@ -5,9 +5,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 
 public class Category {
-    private String categoryId; // Mã danh mục
-    private String categoryName;  // Tên danh mục
-    private String categoryImage; // URL/đường dẫn hình ảnh
+    private String categoryId;
+    private String categoryName;
+    private String categoryImage;
 
     // Khởi tạo đối tượng Firestore
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -16,7 +16,7 @@ public class Category {
     public Category() {
     }
 
-    // Constructor với ba tham số
+
     public Category(String categoryId, String categoryName, String categoryImage) {
         this.categoryId = categoryId; // Khởi tạo mã danh mục
         this.categoryName = categoryName; // Khởi tạo tên danh mục
@@ -51,22 +51,22 @@ public class Category {
     }
 
     public void setCategoryImage(String categoryImage) {
-        this.categoryImage = categoryImage; // Thiết lập thuộc tính hình ảnh
+        this.categoryImage = categoryImage;
     }
 
     // Lấy danh sách danh mục từ Firestore
     public void getAllCategories(final FirestoreCallback callback) {
-        db.collection("categories") // Lấy dữ liệu từ collection "categories"
+        db.collection("categories")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         ArrayList<Category> categoryList = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            String name = document.getString("categoryName"); // Lấy tên danh mục
-                            String image = document.getString("categoryImage"); // Lấy hình ảnh từ Firestore
-                            categoryList.add(new Category(name, image)); // Thêm danh mục vào danh sách
+                            String name = document.getString("categoryName");
+                            String image = document.getString("categoryImage");
+                            categoryList.add(new Category(name, image));
                         }
-                        // Gọi callback khi dữ liệu được lấy thành công
+
                         callback.onCallback(categoryList);
                     } else {
                         // Xử lý lỗi
