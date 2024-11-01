@@ -16,33 +16,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
-
-        <!-- Thêm activity OrderActivity -->
         <activity
-            android:name=".Home.HomeActivity"
+            android:name=".User_information_activity"
+            android:exported="false" />
+        <activity
+            android:name=".FormEmployeeActivity"
+            android:exported="false" />
+
+
+        <activity
+            android:name=".home_user"
+            android:exported="false" />
+        <activity
+            android:name=".Login_Logout.IntroActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".Login_Logout.IntroActivity" android:exported="true" />
-        <activity android:name=".User_information_activity" android:exported="false" />
-        <activity android:name=".FormEmployeeActivity" android:exported="false" />
-        <activity android:name=".home_user" android:exported="false" />
-        <activity android:name=".Login_Logout.LoginActivity" />
-        <activity android:name=".Home.AddFoodActivity" />
-        <activity android:name=".DauThe.ActivityFormEmployee" />
-        <activity android:name=".Category.CategoryActivity" />
-        <activity android:name=".Category.CategoryAddActivity" />
-        <activity android:name=".Category.CategoryEditActivity" />
-        <activity android:name=".Order.OrderRequestActivity" />
-        <activity android:name=".Order.TableListActivity" />
-        <activity android:name=".Order.OrderActivity" />
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".Login_Logout.LoginActivity" />
+        <activity android:name=".Home.HomeActivity" />
+        <activity android:name=".Home.AddFoodActivity" />
+        <activity android:name=".DauThe.ActivityFormEmployee" />
     </application>
+
 </manifest>
