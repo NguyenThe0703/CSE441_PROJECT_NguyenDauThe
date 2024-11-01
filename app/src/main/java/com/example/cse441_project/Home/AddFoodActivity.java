@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cse441_project.Dialog.FoodAddSuccess;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.R;
@@ -104,9 +105,9 @@ public class  AddFoodActivity extends AppCompatActivity {
             // Lưu món ăn vào Firestore
             db.collection("FoodItem").document(lastID).set(foodItem)
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(AddFoodActivity.this, "Món ăn đã được thêm thành công!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AddFoodActivity.this, HomeActivity.class);
-                        startActivity(intent);
+                        FoodAddSuccess dialog = new FoodAddSuccess(this);
+                        dialog.showSuccessDialog();
+
                     })
                     .addOnFailureListener(e -> Toast.makeText(AddFoodActivity.this, "Lỗi khi lưu món ăn!", Toast.LENGTH_SHORT).show());
         } catch (NumberFormatException e) {

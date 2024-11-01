@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.Category.CategoryActivity;
+import com.example.cse441_project.DauThe.ActivityFormEmployee;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.R;
 import com.google.android.material.navigation.NavigationView;
@@ -33,6 +35,8 @@ public class DeleteFood extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DeleteAdapter adapter;
     private List<FoodItem> foodItemList;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
     private ImageView imgMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,8 @@ public class DeleteFood extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.delete_food);
         recyclerView = findViewById(R.id.recyclerView);
-
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
         imgMenu = findViewById(R.id.menu_img);
@@ -54,6 +59,66 @@ public class DeleteFood extends AppCompatActivity {
         if (savedInstanceState == null) {
             addFragment(new HomeFragment());
         }
+
+        imgMenu.setOnClickListener(v -> {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.nav_manage_food) {
+                    View view = findViewById(R.id.nav_manage_food);
+                    PopupMenu popupMenu = new PopupMenu(DeleteFood.this, view);
+                    popupMenu.getMenuInflater().inflate(R.menu.sub_menu, popupMenu.getMenu());
+
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem submenuItem) {
+                            if (submenuItem.getItemId() == R.id.add) {
+                                startActivity(new Intent(DeleteFood.this, AddFoodActivity.class));
+                                return true;
+                            } else if (submenuItem.getItemId() == R.id.edit) {
+                                startActivity(new Intent(DeleteFood.this, SearchEditFood.class));
+
+                                return true;
+                            } else if (submenuItem.getItemId() == R.id.delete) {
+                                startActivity(new Intent(DeleteFood.this, DeleteFood.class));
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    });
+
+                    popupMenu.show();
+
+                } else if (item.getItemId() == R.id.nav_manage_food_type) {
+                    startActivity(new Intent(DeleteFood.this, CategoryActivity.class));
+                } else if (item.getItemId() == R.id.nav_manage_table) {
+                    startActivity(new Intent(DeleteFood.this, AddFoodActivity.class));
+                } else if (item.getItemId() == R.id.nav_top_selling_items) {
+                    startActivity(new Intent(DeleteFood.this, TopSaleActivity.class));
+                } else if (item.getItemId() == R.id.nav_revenue_statistics) {
+                    startActivity(new Intent(DeleteFood.this, RevenueActivity.class));
+                } else if (item.getItemId() == R.id.nav_manage_employee) {
+                    startActivity(new Intent(DeleteFood.this, ActivityFormEmployee.class));
+                } else {
+                    Toast.makeText(DeleteFood.this, "Item không xác định", Toast.LENGTH_SHORT).show();
+                }
+
+//                drawerLayout.closeDrawer(GravityCompat.START); // Đóng ngăn kéo sau khi chọn
+                return true; // Trả về true để xác nhận sự kiện đã được xử lý
+            }
+        });
+
+
+
+
     }
 
     private void addFragment(Fragment fragment) {
@@ -75,7 +140,7 @@ public class DeleteFood extends AppCompatActivity {
                             FoodItem foodItem = document.toObject(FoodItem.class);
                             foodItemList.add(foodItem); // Thêm vào danh sách
                         }
-                        adapter.notifyDataSetChanged(); // Cập nhật adapter
+                        adapter.notifyDataSetChanged();
                     } else {
                         Toast.makeText(DeleteFood.this, "Lỗi khi lấy dữ liệu: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
