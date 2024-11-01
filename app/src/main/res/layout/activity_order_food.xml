@@ -66,6 +66,7 @@
                 android:layout_marginTop="8dp">
 
                 <!-- Nút trừ với icon -->
+
                 <Button
                     android:id="@+id/button_minus"
                     android:layout_width="25dp"
@@ -75,18 +76,18 @@
                     android:text="" />
 
                 <!-- Ô nhập số lượng -->
-                <EditText
-                    android:id="@+id/edittext_quantity"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="1" />
 
                 <!-- Nút cộng với icon -->
+                <TextView
+                    android:id="@+id/edittext_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textColor="@color/black" />
+
                 <Button
                     android:id="@+id/button_plus"
                     android:layout_width="18dp"

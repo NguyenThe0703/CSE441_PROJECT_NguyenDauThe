@@ -51,19 +51,19 @@
             android:textStyle="bold" />
 
         <TableLayout
+            android:id="@+id/tableLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:padding="8dp">
 
-            <TableRow
-                android:background="#CCCCCC">
+            <TableRow android:background="#CCCCCC">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:gravity="center"
+                    android:padding="8dp"
                     android:text="STT"
                     android:textStyle="bold" />
 
@@ -71,24 +71,24 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="8dp"
                     android:gravity="center"
+                    android:padding="8dp"
                     android:text="Tên món"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:gravity="center"
+                    android:padding="8dp"
                     android:text="Số lượng"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:gravity="center"
+                    android:padding="8dp"
                     android:text="Giá tiền"
                     android:textStyle="bold" />
             </TableRow>
@@ -99,31 +99,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:gravity="center"
-                    android:text="1" />
+                    android:padding="8dp"
+                    android:text="" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="8dp"
                     android:gravity="center"
-                    android:text="Phở" />
+                    android:padding="8dp"
+                    android:text="" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:gravity="center"
-                    android:text="1" />
+                    android:padding="8dp"
+                    android:text="" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:gravity="center"
-                    android:text="40,000" />
+                    android:padding="8dp"
+                    android:text="" />
             </TableRow>
 
             <!-- Có thể thêm nhiều TableRow cho các món khác -->

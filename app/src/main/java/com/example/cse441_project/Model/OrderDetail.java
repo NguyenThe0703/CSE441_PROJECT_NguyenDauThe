@@ -1,6 +1,8 @@
 package com.example.cse441_project.Model;
 
-public class OrderDetail {
+import java.io.Serializable;
+
+public class OrderDetail implements Serializable {
     private String orderId;        // MaGM
     private String itemFoodID;     // MaThucDon
     private int quantity;          // SoLuong
@@ -26,11 +28,11 @@ public class OrderDetail {
     }
 
     // Getter and setter for menuItemId (MaThucDon)
-    public String getMenuItemId() {
+    public String getItemFoodID() {
         return itemFoodID;
     }
 
-    public void setMenuItemId(String menuItemId) {
+    public void setItemFoodID(String getItemFoodID) {
         this.itemFoodID = itemFoodID;
     }
 
@@ -43,4 +45,3 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 }
-

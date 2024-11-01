@@ -14,25 +14,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.cse441_project.Model.FoodItem;
+import com.example.cse441_project.Model.OrderDetail;
 import com.example.cse441_project.R;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class OrderFoodAdapter extends RecyclerView.Adapter<OrderFoodAdapter.ViewHolder> {
-
+    private List<Integer> quantityList = new ArrayList<>();
     private List<FoodItem> foodItemList;
+    private List<Float> orderDetails = new ArrayList<>();
 
     public OrderFoodAdapter(List<FoodItem> foodItemList) {
         this.foodItemList = foodItemList;
+        for (int i = 0; i < 50; i++) {
+            quantityList.add(0);
+        }
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_order_food, parent, false);
+                .inflate(R.layout.activity_order_food, parent, false); // Use the correct layout
         return new ViewHolder(view);
     }
 
@@ -40,7 +45,7 @@ public class OrderFoodAdapter extends RecyclerView.Adapter<OrderFoodAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FoodItem foodItem = foodItemList.get(position);
 
-        // Thiết lập tên và giá món ăn
+
         holder.textView1.setText(foodItem.getFoodName());
         NumberFormat numberFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
         String formattedPrice = numberFormat.format(foodItem.getPrice()) + "đ";
@@ -51,35 +56,20 @@ public class OrderFoodAdapter extends RecyclerView.Adapter<OrderFoodAdapter.View
                 .load(foodItem.getImageUrl())
                 .into(holder.imageView);
 
-        // Thiết lập số lượng ban đầu là 1
-        holder.editTextQuantity.setText("1");
-
-        // Xử lý sự kiện nút trừ
+        //holder.editTextQuantity.setText(String.valueOf(quantityList.get(position)));
         holder.buttonMinus.setOnClickListener(v -> {
-            int quantity = Integer.parseInt(holder.editTextQuantity.getText().toString());
-            if (quantity > 1) {
-                quantity--;
+            int quantity = quantityList.get(position);
+            if (quantity > 0) { // Giảm nếu số lượng lớn hơn 0
+                quantityList.set(position, --quantity);
                 holder.editTextQuantity.setText(String.valueOf(quantity));
             }
         });
-
-        // Xử lý sự kiện nút cộng
         holder.buttonPlus.setOnClickListener(v -> {
-            int quantity = Integer.parseInt(holder.editTextQuantity.getText().toString());
-            quantity++;
+            int quantity = quantityList.get(position);
+            quantityList.set(position, ++quantity);
             holder.editTextQuantity.setText(String.valueOf(quantity));
         });
-
-        // Xử lý sự kiện nút Gọi món
-        holder.BtnGoiMon.setOnClickListener(v -> {
-            Intent intent = new Intent(holder.itemView.getContext(), OrderRequestActivity.class); // Thay YourNewActivity bằng Activity mới bạn muốn mở
-            intent.putExtra("foodName", foodItem.getFoodName()); // Truyền dữ liệu nếu cần
-            intent.putExtra("quantity", holder.editTextQuantity.getText().toString());
-            holder.itemView.getContext().startActivity(intent);
-        });
     }
-
-
     @Override
     public int getItemCount() {
         return foodItemList.size();
@@ -89,19 +79,27 @@ public class OrderFoodAdapter extends RecyclerView.Adapter<OrderFoodAdapter.View
         ImageView imageView;
         TextView textView1, textView2;
         Button buttonMinus, buttonPlus;
-        EditText editTextQuantity;
-        Button BtnGoiMon;
-
+        TextView editTextQuantity; // Changed to TextView
         public ViewHolder(View itemView) {
             super(itemView);
-            // Sử dụng ID từ layout activity_order_food
             imageView = itemView.findViewById(R.id.myImageView);
             textView1 = itemView.findViewById(R.id.myTextView1);
             textView2 = itemView.findViewById(R.id.myTextView2);
             buttonMinus = itemView.findViewById(R.id.button_minus);
             buttonPlus = itemView.findViewById(R.id.button_plus);
             editTextQuantity = itemView.findViewById(R.id.edittext_quantity);
-            BtnGoiMon = itemView.findViewById(R.id.btnGoiMon);
+
         }
+    }
+    public List<OrderDetail> getOrderDetails(String idOder) {
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        for (int i = 0; i < foodItemList.size(); i++) {
+            if (quantityList.get(i) > 0) {
+                FoodItem foodItem = foodItemList.get(i);
+                int quantity = quantityList.get(i);
+                orderDetails.add(new OrderDetail(idOder,foodItem.getItemFoodID(), quantity));
+            }
+        }
+        return orderDetails;
     }
 }

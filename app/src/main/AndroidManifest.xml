@@ -47,5 +47,6 @@
         <activity android:name=".Category.CategoryActivity" />
         <activity android:name=".Category.CategoryAddActivity" />
         <activity android:name=".Category.CategoryEditActivity" />
+        <activity android:name=".Order.OrderRequestActivity" />
     </application>
 </manifest>
