@@ -46,6 +46,8 @@
         <activity android:name=".Home.AddFoodActivity" />
         <activity android:name=".DauThe.ActivityFormEmployee" />
         <activity android:name=".DauThe.AddEmployee" />
+        <activity android:name=".DauThe.MyInfoActivity" />
+        <activity android:name=".DauThe.EmployeeDetailsActivity" />
     </application>
 
 </manifest>

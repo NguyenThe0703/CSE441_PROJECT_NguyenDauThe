@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cse441_project.DauThe.ActivityFormEmployee;
+import com.example.cse441_project.DauThe.MyInfoActivity;
 import com.example.cse441_project.Home.AddFoodActivity;
 import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.Model.Employee;
@@ -45,7 +46,7 @@ public class IntroActivity extends AppCompatActivity {
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(IntroActivity.this, ActivityFormEmployee.class);
+                Intent intent = new Intent(IntroActivity.this, MyInfoActivity.class);
                 startActivity(intent);
             }
         });

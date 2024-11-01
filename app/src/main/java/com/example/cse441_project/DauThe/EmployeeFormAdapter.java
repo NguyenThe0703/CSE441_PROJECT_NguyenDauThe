@@ -34,7 +34,13 @@ public class EmployeeFormAdapter extends RecyclerView.Adapter<EmployeeFormAdapte
         holder.tvFullName.setText(employee.getFullName());
         holder.tvUsername.setText(employee.getUsername());
         holder.tvRole.setText(employee.getRole());
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), EmployeeDetailsActivity.class);
 
+            intent.putExtra("employee", employee);
+
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
