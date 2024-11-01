@@ -1,21 +1,32 @@
 package com.example.cse441_project.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.Category.CategoryActivity;
+import com.example.cse441_project.DauThe.ActivityFormEmployee;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.R;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -27,7 +38,10 @@ public class SearchEditFood extends AppCompatActivity {
     private EditAdapter adapter;
     private List<FoodItem> foodItemList;
     EditText searchEditText ;
+    private NavigationView navigationView;
+    private ImageView imgMenu;
     private Button searchButton;
+    private DrawerLayout drawerLayout;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +50,14 @@ public class SearchEditFood extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         searchEditText = findViewById(R.id.search_edt);
         searchButton = findViewById(R.id.search_btn);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        imgMenu = findViewById(R.id.menu_img);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
+        navigationView = findViewById(R.id.nav_view);
+
         searchButton.setOnClickListener(v -> {
+
             String keyword = searchEditText.getText().toString().trim();
             if (!keyword.isEmpty()) {
                 searchFoodItems(keyword);
@@ -53,6 +72,64 @@ public class SearchEditFood extends AppCompatActivity {
         foodItemList = new ArrayList<>();
         adapter = new EditAdapter(SearchEditFood.this,foodItemList);
         recyclerView.setAdapter(adapter);
+
+        imgMenu.setOnClickListener(v -> {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            } else {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.nav_manage_food) {
+                    View view = findViewById(R.id.nav_manage_food);
+                    PopupMenu popupMenu = new PopupMenu(SearchEditFood.this, view);
+                    popupMenu.getMenuInflater().inflate(R.menu.sub_menu, popupMenu.getMenu());
+
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem submenuItem) {
+                            if (submenuItem.getItemId() == R.id.add) {
+                                startActivity(new Intent(SearchEditFood.this, AddFoodActivity.class));
+                                return true;
+                            } else if (submenuItem.getItemId() == R.id.edit) {
+                                startActivity(new Intent(SearchEditFood.this, SearchEditFood.class));
+
+                                return true;
+                            } else if (submenuItem.getItemId() == R.id.delete) {
+                                startActivity(new Intent(SearchEditFood.this, DeleteFood.class));
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    });
+
+                    popupMenu.show();
+
+                } else if (item.getItemId() == R.id.nav_manage_food_type) {
+                    startActivity(new Intent(SearchEditFood.this, CategoryActivity.class));
+                } else if (item.getItemId() == R.id.nav_manage_table) {
+                    startActivity(new Intent(SearchEditFood.this, AddFoodActivity.class));
+                } else if (item.getItemId() == R.id.nav_top_selling_items) {
+                    startActivity(new Intent(SearchEditFood.this, TopSaleActivity.class));
+                } else if (item.getItemId() == R.id.nav_revenue_statistics) {
+                    startActivity(new Intent(SearchEditFood.this, RevenueActivity.class));
+                } else if (item.getItemId() == R.id.nav_manage_employee) {
+                    startActivity(new Intent(SearchEditFood.this, ActivityFormEmployee.class));
+                } else {
+                    Toast.makeText(SearchEditFood.this, "Item không xác định", Toast.LENGTH_SHORT).show();
+                }
+
+//                drawerLayout.closeDrawer(GravityCompat.START); // Đóng ngăn kéo sau khi chọn
+                return true; // Trả về true để xác nhận sự kiện đã được xử lý
+            }
+        });
+
+
 
     }
     private void loadFoodItemsFromFirestore() {

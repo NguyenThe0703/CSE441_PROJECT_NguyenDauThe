@@ -1,8 +1,6 @@
 package com.example.cse441_project.Home;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.text.NumberFormat;
 import com.bumptech.glide.Glide;
+import com.example.cse441_project.Dialog.FoodAddSuccess;
+import com.example.cse441_project.Dialog.FoodConfirmDelete;
+import com.example.cse441_project.Dialog.FoodDeleteSuccess;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.R;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,16 +52,11 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.ViewHolder
                 .into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> {
-            // Tạo AlertDialog để xác nhận xóa
-            new AlertDialog.Builder(context)
-                    .setTitle("Xóa món ăn")
-                    .setMessage("Bạn có chắc chắn muốn xóa món ăn này không?")
-                    .setPositiveButton("Xóa", (dialog, which) -> {
-
-                        deleteFoodItem(foodItem.getItemFoodID(), position);
-                    })
-                    .setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss())
-                    .show();
+            // Tạo và hiển thị Dialog xác nhận xóa
+            FoodConfirmDelete dialog = new FoodConfirmDelete(context, () -> {
+                deleteFoodItem(foodItem.getItemFoodID(), position);
+            });
+            dialog.show();
         });
     }
     private void deleteFoodItem(String itemFoodID, int position) {
@@ -69,13 +65,12 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.ViewHolder
         db.collection("FoodItem").document(itemFoodID)
                 .delete()
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(context, "Đã xóa món ăn thành công!", Toast.LENGTH_SHORT).show();
-                    // Xóa item khỏi danh sách và cập nhật adapter
+                    FoodDeleteSuccess dialog = new FoodDeleteSuccess(context);
+                    dialog.showSuccessDialog();
                     foodItemList.remove(position);
                     notifyItemRemoved(position);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(context, "Lỗi khi xóa món ăn!", Toast.LENGTH_SHORT).show();
                 });
     }
     @Override

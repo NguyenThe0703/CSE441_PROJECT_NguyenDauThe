@@ -16,12 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.cse441_project.Dialog.FoodAddSuccess;
+import com.example.cse441_project.Dialog.FoodConfirmUpdate;
+import com.example.cse441_project.Dialog.FoodUpdateSuccess;
 import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.R;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -44,6 +45,7 @@ public class EditFood extends AppCompatActivity {
     private String lastID;
     private String categoryName;
     private FoodItem foodItem;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,22 +61,34 @@ public class EditFood extends AppCompatActivity {
         foodItem = getIntent().getParcelableExtra("foodItem");
         if (foodItem != null) {
             populateFoodDetails(foodItem);
-        }else
-        {
+        } else {
             Toast.makeText(this, "Lỗi", Toast.LENGTH_SHORT).show();
         }
 
         image.setOnClickListener(v -> openGallery());
 
         GetCategoriesFromFirestore();
+        cancel.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SearchEditFood.class);
+            startActivity(intent);
+        });
 
-        updateFood.setOnClickListener(v -> uploadImageToFirebaseStorage(imageUri));
+
+        updateFood.setOnClickListener(v -> {
+
+            FoodConfirmUpdate dialog = new FoodConfirmUpdate(EditFood.this, () -> {
+                uploadImageToFirebaseStorage(imageUri);
+            });
+            dialog.show();
+        });
+
+
     }
 
     private void populateFoodDetails(FoodItem foodItem) {
         getCategoryById(foodItem.getCategoryId());
-
         foodName.setText(foodItem.getFoodName());
+        imageUri = Uri.parse(foodItem.getImageUrl());
 
         NumberFormat numberFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
         String formattedPrice = numberFormat.format(foodItem.getPrice());
@@ -127,9 +141,8 @@ public class EditFood extends AppCompatActivity {
             // Lưu món ăn vào Firestore
             db.collection("FoodItem").document(id).set(foodItem)
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(EditFood.this, "Món ăn đã được thêm thành công!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(EditFood.this, HomeActivity.class);
-                        startActivity(intent);
+                        FoodUpdateSuccess dialog = new FoodUpdateSuccess(this);
+                        dialog.showSuccessDialog();
                     })
                     .addOnFailureListener(e -> Toast.makeText(EditFood.this, "Lỗi khi lưu món ăn!", Toast.LENGTH_SHORT).show());
         } catch (NumberFormatException e) {
@@ -146,7 +159,7 @@ public class EditFood extends AppCompatActivity {
                         Category category = documentSnapshot.toObject(Category.class);
                         if (category != null) {
                             categoryName = category.getCategoryName();
-                            // Cập nhật UI hoặc thông tin liên quan tại đây
+                            Toast.makeText(EditFood.this, "Lấy thanành công", Toast.LENGTH_SHORT).show();
                             runOnUiThread(() -> {
                                 listCategoryName.setText(categoryName);
                             });
@@ -159,7 +172,6 @@ public class EditFood extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Log.e("Firestore", "Error retrieving data: " + e.getMessage()));
     }
-
 
 
     private void GetCategoriesFromFirestore() {

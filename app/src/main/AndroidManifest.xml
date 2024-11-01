@@ -49,6 +49,12 @@
         <activity android:name=".Category.CategoryAddActivity" />
         <activity android:name=".Category.CategoryEditActivity" />
         <activity android:name=".Home.TopSaleActivity" />
+        <activity android:name=".Home.SearchEditFood" />
+        <activity android:name=".Home.EditFood" />
+        <activity android:name=".Home.RevenueActivity" />
+        <activity android:name=".Home.DeleteFood" />
+
+
     </application>
 
 </manifest>

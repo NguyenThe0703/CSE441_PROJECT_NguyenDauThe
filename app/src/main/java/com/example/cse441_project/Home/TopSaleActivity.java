@@ -1,7 +1,9 @@
 package com.example.cse441_project.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -23,19 +25,23 @@ public class TopSaleActivity extends AppCompatActivity {
     private HomeAdapter adapter;
     private List<FoodItem> foodItemList = new ArrayList<>();
     private Map<String, Integer> foodSalesCount = new HashMap<>();
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.top_sale_activity);
 
-
+        imgBack = findViewById(R.id.img_back);
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new HomeAdapter(foodItemList);
         fetchTopSellingItems();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
+        imgBack.setOnClickListener(v->{
+            Intent intent = new Intent(this,HomeActivity.class);
+            startActivity(intent);
+        });
 
     }
 
