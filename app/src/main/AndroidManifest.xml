@@ -16,26 +16,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CSE441_PROJECT"
         tools:targetApi="31">
-        <activity
-            android:name=".User_information_activity"
-            android:exported="false" />
-        <activity
-            android:name=".FormEmployeeActivity"
-            android:exported="false" />
 
-
+        <!-- Thêm activity OrderActivity làm activity khởi động -->
         <activity
-            android:name=".home_user"
-            android:exported="false" />
-        <activity
-            android:name=".Login_Logout.IntroActivity"
+            android:name=".Order.OrderActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Xóa intent-filter khỏi activity IntroActivity -->
+        <activity
+            android:name=".Login_Logout.IntroActivity"
+            android:exported="true" />
+
+        <activity android:name=".User_information_activity" android:exported="false" />
+        <activity android:name=".FormEmployeeActivity" android:exported="false" />
+        <activity android:name=".home_user" android:exported="false" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -45,6 +44,8 @@
         <activity android:name=".Home.HomeActivity" />
         <activity android:name=".Home.AddFoodActivity" />
         <activity android:name=".DauThe.ActivityFormEmployee" />
+        <activity android:name=".Category.CategoryActivity" />
+        <activity android:name=".Category.CategoryAddActivity" />
+        <activity android:name=".Category.CategoryEditActivity" />
     </application>
-
 </manifest>

@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.Category.CategoryActivity;
 import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.R;
 
@@ -114,7 +115,7 @@ public class HomeActivity extends AppCompatActivity {
                     popupMenu.show();
 
                 } else if (item.getItemId() == R.id.nav_manage_food_type) {
-                    startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
+                    startActivity(new Intent(HomeActivity.this, CategoryActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_table) {
                     startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
                 } else if (item.getItemId() == R.id.nav_top_selling_items) {
