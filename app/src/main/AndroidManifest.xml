@@ -23,12 +23,20 @@
             android:name=".FormEmployeeActivity"
             android:exported="false" />
 
-
         <activity
             android:name=".home_user"
             android:exported="false" />
         <activity
             android:name=".Login_Logout.IntroActivity"
+            android:exported="true">
+
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".Login_Logout.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,28 +44,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-
-        <activity android:name=".Login_Logout.LoginActivity" />
-        <activity android:name=".Category.CategoryActivity" />
-        <activity android:name=".Category.CategoryEditActivity" />
-        <activity android:name=".Category.CategoryAddActivity" />
+        <activity android:name=".Home.HomeActivity" />
+        <activity android:name=".Home.AddFoodActivity" />
         <activity android:name=".DauThe.ActivityFormEmployee" />
-        <activity android:name=".FoodItem.AddFoodActivity" />
-        <activity android:name=".FoodItem.DeleteFood" />
-        <activity android:name=".FoodItem.EditFood" />
-        <activity android:name=".FoodItem.HomeActivity" />
-        <activity android:name=".FoodItem.HomeUser" />
-        <activity android:name=".FoodItem.RevenueActivity" />
-        <activity android:name=".FoodItem.SearchEditFood" />
-        <activity android:name=".FoodItem.TopSaleActivity" />
+        <activity android:name=".Order.TableListActivity" />
         <activity android:name=".Order.InvoiceActivity" />
         <activity android:name=".Order.OrderActivity" />
-        <activity android:name=".Order.TableListActivity" />
-
+        <activity android:name=".Order.OrderRequestActivity"/>
 
     </application>
 
