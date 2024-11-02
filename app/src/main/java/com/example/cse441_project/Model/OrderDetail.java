@@ -32,10 +32,9 @@ public class OrderDetail implements Serializable {
         return itemFoodID;
     }
 
-    public void setItemFoodID(String getItemFoodID) {
+    public void setItemFoodID(String itemFoodID) {
         this.itemFoodID = itemFoodID;
     }
-
     // Getter and setter for quantity (SoLuong)
     public int getQuantity() {
         return quantity;

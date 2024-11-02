@@ -50,6 +50,7 @@
         <activity android:name=".Order.TableListActivity" />
         <activity android:name=".Order.InvoiceActivity" />
         <activity android:name=".Order.OrderActivity" />
+        <activity android:name=".Order.OrderRequestActivity"/>
 
     </application>
 
