@@ -1,9 +1,11 @@
 package com.example.cse441_project.Model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Employee {
+public class Employee implements Serializable {
+
     private String employeeId; // maNV
     private String username;    // tenDN
     private String role;        // phanQuyen
@@ -14,7 +16,9 @@ public class Employee {
     private String idCard;      // cmnd
 
     // Default constructor required for Firebase
-    public Employee() {}
+    public Employee() {
+
+    }
 
     // Full constructor
     public Employee(String employeeId, String username, String role, String password, String fullName, String gender, String dateOfBirth, String idCard) {

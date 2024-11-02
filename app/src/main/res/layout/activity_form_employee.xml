@@ -60,28 +60,5 @@
             android:backgroundTint="#E83E3E"
             android:text="Thêm" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#E83E3E"
-            android:text="Sửa" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#E83E3E"
-            android:text="Xoá" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#E83E3E"
-            android:text="Xem" />
     </LinearLayout>
 </LinearLayout>

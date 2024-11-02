@@ -33,21 +33,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Employee ID -->
-
-    <!-- Username -->
     <EditText
         android:id="@+id/et_username"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="24dp"
         android:hint="Tên đăng nhập"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/employee_id" />
+
+    <EditText
+        android:id="@+id/employee_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Mã Nhân Viên"
+        android:inputType="text"
+        android:focusable="false"
+        android:clickable="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_info_heading" />
 
-    <!-- Password -->
+
     <EditText
         android:id="@+id/et_password"
         android:layout_width="0dp"
@@ -117,18 +129,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_dob" />
 
-    <!-- Add Employee Button -->
-    <Button
-        android:id="@+id/btn_add_employee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Thêm nhân viên"
-        android:backgroundTint="#F44336"
-        android:textColor="#ffffff"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/et_cmnd"
-        app:layout_constraintStart_toStartOf="parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/finish_btn"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/red_500"
+            android:text="Xoá tài khoản" />
+
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/red_500"
+            android:text="Cập nhật" />
+    </LinearLayout>
+
+    <!-- Add Employee Button -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
