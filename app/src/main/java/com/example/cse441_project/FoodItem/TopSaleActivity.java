@@ -1,4 +1,4 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.FoodItem;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cse441_project.Adapter.HomeAdapter;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.R;
 import com.google.firebase.firestore.FirebaseFirestore;

@@ -2,14 +2,11 @@ package com.example.cse441_project.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.example.cse441_project.Home.DeleteFood;
-import com.example.cse441_project.Home.SearchEditFood;
 import com.example.cse441_project.R;
 
 public class FoodDeleteSuccess {

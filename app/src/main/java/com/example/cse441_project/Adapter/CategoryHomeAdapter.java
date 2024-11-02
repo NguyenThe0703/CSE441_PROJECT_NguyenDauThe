@@ -1,4 +1,4 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +15,10 @@ import com.example.cse441_project.R;
 
 import java.util.List;
 
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder> {
+public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapter.CategoryViewHolder> {
     private List<Category> categoryList;
 
-    public CategoryAdapter(List<Category> categoryList) {
+    public CategoryHomeAdapter(List<Category> categoryList) {
         this.categoryList = categoryList;
     }
 

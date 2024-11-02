@@ -1,4 +1,4 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.FoodItem;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,6 +19,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.Adapter.DeleteFoodAdapter;
 import com.example.cse441_project.Category.CategoryActivity;
 import com.example.cse441_project.DauThe.ActivityFormEmployee;
 import com.example.cse441_project.Model.FoodItem;
@@ -33,7 +33,7 @@ import java.util.List;
 
 public class DeleteFood extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private DeleteAdapter adapter;
+    private DeleteFoodAdapter adapter;
     private List<FoodItem> foodItemList;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -53,7 +53,7 @@ public class DeleteFood extends AppCompatActivity {
         loadFoodItemsFromFirestore();
 
         foodItemList = new ArrayList<>();
-        adapter = new DeleteAdapter(DeleteFood.this,foodItemList);
+        adapter = new DeleteFoodAdapter(DeleteFood.this,foodItemList);
         recyclerView.setAdapter(adapter);
 
         if (savedInstanceState == null) {

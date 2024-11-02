@@ -1,4 +1,4 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.FoodItem;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.Adapter.EditFoodAdapter;
 import com.example.cse441_project.Category.CategoryActivity;
 import com.example.cse441_project.DauThe.ActivityFormEmployee;
 import com.example.cse441_project.Model.FoodItem;
@@ -35,7 +36,7 @@ import java.util.List;
 
 public class SearchEditFood extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private EditAdapter adapter;
+    private EditFoodAdapter adapter;
     private List<FoodItem> foodItemList;
     EditText searchEditText ;
     private NavigationView navigationView;
@@ -70,7 +71,7 @@ public class SearchEditFood extends AppCompatActivity {
             addFragment(new HomeFragment());
         }
         foodItemList = new ArrayList<>();
-        adapter = new EditAdapter(SearchEditFood.this,foodItemList);
+        adapter = new EditFoodAdapter(SearchEditFood.this,foodItemList);
         recyclerView.setAdapter(adapter);
 
         imgMenu.setOnClickListener(v -> {
