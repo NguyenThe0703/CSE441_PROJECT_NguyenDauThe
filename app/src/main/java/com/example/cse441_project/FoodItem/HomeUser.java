@@ -12,11 +12,12 @@ import com.example.cse441_project.Login_Logout.IntroActivity;
 import com.example.cse441_project.R;
 
 public class HomeUser extends AppCompatActivity {
-    private Button logOut;
+    private Button logOut,myInfo;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_user);
+        myInfo = findViewById(R.id.my_info);
         logOut = findViewById(R.id.log_out);
         logOut.setOnClickListener(v -> {
             SharedPreferences sharedPreferences = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
@@ -26,9 +27,10 @@ public class HomeUser extends AppCompatActivity {
             editor.remove("username");
             editor.remove("password");
             editor.apply();
-
-
             startActivity(new Intent(HomeUser.this, IntroActivity.class));
+        });
+        myInfo.setOnClickListener(v->{
+            startActivity(new Intent(HomeUser.this, HomeUser.class));
         });
     }
 }

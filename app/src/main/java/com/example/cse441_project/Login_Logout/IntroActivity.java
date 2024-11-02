@@ -41,11 +41,10 @@ public class IntroActivity extends AppCompatActivity {
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(IntroActivity.this, ActivityFormEmployee.class);
+                Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -61,15 +60,11 @@ public class IntroActivity extends AppCompatActivity {
         String username = sharedPreferences.getString("username", null);
         String password = sharedPreferences.getString("password", null);
         if (username == null || password == null) return;
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-
         db.collection("Employee")
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Employee employee = document.toObject(Employee.class);
                             if (employee != null) {

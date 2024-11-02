@@ -42,17 +42,21 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".Login_Logout.LoginActivity" />
-        <activity android:name=".FoodItem.HomeActivity" />
-        <activity android:name=".FoodItem.AddFoodActivity" />
-        <activity android:name=".DauThe.ActivityFormEmployee" />
         <activity android:name=".Category.CategoryActivity" />
-        <activity android:name=".Category.CategoryAddActivity" />
         <activity android:name=".Category.CategoryEditActivity" />
-        <activity android:name=".FoodItem.TopSaleActivity" />
-        <activity android:name=".FoodItem.SearchEditFood" />
-        <activity android:name=".FoodItem.EditFood" />
-        <activity android:name=".FoodItem.RevenueActivity" />
+        <activity android:name=".Category.CategoryAddActivity" />
+        <activity android:name=".DauThe.ActivityFormEmployee" />
+        <activity android:name=".FoodItem.AddFoodActivity" />
         <activity android:name=".FoodItem.DeleteFood" />
+        <activity android:name=".FoodItem.EditFood" />
+        <activity android:name=".FoodItem.HomeActivity" />
+        <activity android:name=".FoodItem.HomeUser" />
+        <activity android:name=".FoodItem.RevenueActivity" />
+        <activity android:name=".FoodItem.SearchEditFood" />
+        <activity android:name=".FoodItem.TopSaleActivity" />
+        <activity android:name=".Order.InvoiceActivity" />
+        <activity android:name=".Order.OrderActivity" />
+        <activity android:name=".Order.TableListActivity" />
 
 
     </application>

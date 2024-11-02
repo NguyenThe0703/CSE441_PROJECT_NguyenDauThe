@@ -27,6 +27,7 @@ import com.example.cse441_project.Adapter.HomeAdapter;
 import com.example.cse441_project.Category.CategoryActivity;
 import com.example.cse441_project.DauThe.ActivityFormEmployee;
 import com.example.cse441_project.Model.Category;
+import com.example.cse441_project.Order.OrderActivity;
 import com.example.cse441_project.R;
 
 import com.example.cse441_project.Model.FoodItem;
@@ -116,13 +117,15 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_manage_food_type) {
                     startActivity(new Intent(HomeActivity.this, CategoryActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_table) {
-                    startActivity(new Intent(HomeActivity.this, AddFoodActivity.class));
+                    startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                 } else if (item.getItemId() == R.id.nav_top_selling_items) {
                     startActivity(new Intent(HomeActivity.this, TopSaleActivity.class));
                 } else if (item.getItemId() == R.id.nav_revenue_statistics) {
                     startActivity(new Intent(HomeActivity.this, RevenueActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_employee) {
                     startActivity(new Intent(HomeActivity.this, ActivityFormEmployee.class));
+                } else if (item.getItemId() == R.id.nav_order_food) {
+                    startActivity(new Intent(HomeActivity.this, OrderActivity.class));
                 } else {
                     Toast.makeText(HomeActivity.this, "Item không xác định", Toast.LENGTH_SHORT).show();
                 }

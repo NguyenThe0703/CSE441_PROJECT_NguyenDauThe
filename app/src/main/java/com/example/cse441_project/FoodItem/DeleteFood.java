@@ -23,6 +23,7 @@ import com.example.cse441_project.Adapter.DeleteFoodAdapter;
 import com.example.cse441_project.Category.CategoryActivity;
 import com.example.cse441_project.DauThe.ActivityFormEmployee;
 import com.example.cse441_project.Model.FoodItem;
+import com.example.cse441_project.Order.OrderActivity;
 import com.example.cse441_project.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -100,13 +101,15 @@ public class DeleteFood extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_manage_food_type) {
                     startActivity(new Intent(DeleteFood.this, CategoryActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_table) {
-                    startActivity(new Intent(DeleteFood.this, AddFoodActivity.class));
+                    startActivity(new Intent(DeleteFood.this, HomeActivity.class));
                 } else if (item.getItemId() == R.id.nav_top_selling_items) {
                     startActivity(new Intent(DeleteFood.this, TopSaleActivity.class));
                 } else if (item.getItemId() == R.id.nav_revenue_statistics) {
                     startActivity(new Intent(DeleteFood.this, RevenueActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_employee) {
                     startActivity(new Intent(DeleteFood.this, ActivityFormEmployee.class));
+                } else if (item.getItemId() == R.id.nav_order_food) {
+                    startActivity(new Intent(DeleteFood.this, OrderActivity.class));
                 } else {
                     Toast.makeText(DeleteFood.this, "Item không xác định", Toast.LENGTH_SHORT).show();
                 }

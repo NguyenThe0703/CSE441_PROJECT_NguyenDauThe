@@ -26,6 +26,7 @@ import com.example.cse441_project.Adapter.EditFoodAdapter;
 import com.example.cse441_project.Category.CategoryActivity;
 import com.example.cse441_project.DauThe.ActivityFormEmployee;
 import com.example.cse441_project.Model.FoodItem;
+import com.example.cse441_project.Order.OrderActivity;
 import com.example.cse441_project.R;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -114,13 +115,15 @@ public class SearchEditFood extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.nav_manage_food_type) {
                     startActivity(new Intent(SearchEditFood.this, CategoryActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_table) {
-                    startActivity(new Intent(SearchEditFood.this, AddFoodActivity.class));
+                    startActivity(new Intent(SearchEditFood.this, HomeActivity.class));
                 } else if (item.getItemId() == R.id.nav_top_selling_items) {
                     startActivity(new Intent(SearchEditFood.this, TopSaleActivity.class));
                 } else if (item.getItemId() == R.id.nav_revenue_statistics) {
                     startActivity(new Intent(SearchEditFood.this, RevenueActivity.class));
                 } else if (item.getItemId() == R.id.nav_manage_employee) {
                     startActivity(new Intent(SearchEditFood.this, ActivityFormEmployee.class));
+                } else if (item.getItemId() == R.id.nav_order_food) {
+                    startActivity(new Intent(SearchEditFood.this, OrderActivity.class));
                 } else {
                     Toast.makeText(SearchEditFood.this, "Item không xác định", Toast.LENGTH_SHORT).show();
                 }
