@@ -44,8 +44,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home.HomeActivity" />
-        <activity android:name=".Home.AddFoodActivity" />
+        <activity android:name=".FoodItem.HomeActivity" />
+        <activity android:name=".FoodItem.AddFoodActivity" />
         <activity android:name=".DauThe.ActivityFormEmployee" />
         <activity android:name=".Order.TableListActivity" />
         <activity android:name=".Order.InvoiceActivity" />
