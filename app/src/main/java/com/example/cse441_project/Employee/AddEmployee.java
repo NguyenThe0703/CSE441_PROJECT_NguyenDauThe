@@ -1,4 +1,4 @@
-package com.example.cse441_project.DauThe;
+package com.example.cse441_project.Employee;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.app.DatePickerDialog;
-import android.widget.DatePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
