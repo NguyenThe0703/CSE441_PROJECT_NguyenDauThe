@@ -22,4 +22,7 @@
     <item
         android:id="@+id/nav_manage_employee"
         android:title="Quản lý nhân viên" />
+    <item
+        android:id="@+id/nav_order_food"
+        android:title="Gọi Món" />
 </menu>

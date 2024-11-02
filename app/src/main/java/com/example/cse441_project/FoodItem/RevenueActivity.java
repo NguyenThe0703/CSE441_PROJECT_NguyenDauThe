@@ -1,9 +1,12 @@
 package com.example.cse441_project.FoodItem;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +34,7 @@ public class RevenueActivity extends AppCompatActivity {
     private RevenueAdapter adapter;
     private List<Order> orderList;
     private double totalRevenue = 0;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,16 +47,20 @@ public class RevenueActivity extends AppCompatActivity {
         rvDoanhThu = findViewById(R.id.rvDoanhThu);
         tvTongDoanhThu = findViewById(R.id.tvTongDoanhThu);
         db = FirebaseFirestore.getInstance();
+        imgBack = findViewById(R.id.img_back);
 
-        // Khởi tạo danh sách hóa đơn và adapter
         orderList = new ArrayList<>();
         adapter = new RevenueAdapter(orderList);
         rvDoanhThu.setLayoutManager(new LinearLayoutManager(this));
         rvDoanhThu.setAdapter(adapter);
 
-        // Sự kiện chọn ngày
+
         etNgayBatDau.setOnClickListener(v -> showDatePickerDialog(etNgayBatDau));
         etNgayKetThuc.setOnClickListener(v -> showDatePickerDialog(etNgayKetThuc));
+        imgBack.setOnClickListener(v -> {
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        });
     }
 
     // Hiển thị DatePickerDialog để chọn ngày
