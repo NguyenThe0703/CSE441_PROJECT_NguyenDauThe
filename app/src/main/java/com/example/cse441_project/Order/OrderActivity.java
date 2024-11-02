@@ -6,20 +6,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cse441_project.Category.CategoryActivity;
-import com.example.cse441_project.Home.AddFoodActivity;
-import com.example.cse441_project.Home.CategoryAdapter;
-import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.Model.OrderDetail;
 import com.example.cse441_project.R;
@@ -29,16 +24,16 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class OrderActivity extends AppCompatActivity {
-    private RecyclerView recyclerView, rcvCategory;
+    private RecyclerView recyclerView;
     private OrderFoodAdapter adapter;
     private List<FoodItem> foodItemList;
     private DrawerLayout drawerLayout;
-    private CategoryAdapter categoryAdapter;
-    private List<Category> categoryList = new ArrayList<>();
     private Button datmon;
     private ImageView searchImageView;
+    private TextView tvTableId; // Display table ID
+
+    private String tableId; // To store the tableId received from Intent
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +41,24 @@ public class OrderActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.order_food);
 
-        // Khởi tạo các thành phần giao diện
+        // Retrieve the tableId from the Intent
+        tableId = getIntent().getStringExtra("tableId");
+
+        // Initialize UI components
         recyclerView = findViewById(R.id.recyclerView);
         drawerLayout = findViewById(R.id.drawer_layout);
-        rcvCategory = findViewById(R.id.rcv_category);
         searchImageView = findViewById(R.id.imageView3);
         datmon = findViewById(R.id.btnGoiMon);
+        tvTableId = findViewById(R.id.tvTableId); // Initialize table ID TextView
 
-        // Thiết lập GridLayout cho danh sách món ăn
+        // Display the table ID
+        if (tableId != null) {
+            tvTableId.setText("Table: " + tableId);
+        } else {
+            tvTableId.setText("Table ID not found");
+        }
+
+        // Set up GridLayout for the food item list
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
@@ -61,18 +66,29 @@ public class OrderActivity extends AppCompatActivity {
         adapter = new OrderFoodAdapter(foodItemList);
         recyclerView.setAdapter(adapter);
 
-        // Tải dữ liệu từ Firestore
+        // Load data from Firestore
         loadFoodItemsFromFirestore();
 
-        // Sự kiện click cho nút datmon
+        // Order button click event
         datmon.setOnClickListener(v -> {
-            // Lấy danh sách OrderDetail từ adapter
-            List<OrderDetail> orderDetails = adapter.getOrderDetails("001");
+            if (tableId == null) {
+                Toast.makeText(OrderActivity.this, "Table ID not found.", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            // Tạo Intent và truyền dữ liệu foodItems và orderDetails
+            // Get the list of OrderDetail from the adapter
+            List<OrderDetail> orderDetails = adapter.getOrderDetails(tableId);
+
+            if (orderDetails.isEmpty()) {
+                Toast.makeText(OrderActivity.this, "Please select at least one item.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Create an Intent and pass tableId, orderDetails, and foodItems to OrderRequestActivity
             Intent intent = new Intent(OrderActivity.this, OrderRequestActivity.class);
-            intent.putExtra("orderDetails", new ArrayList<>(orderDetails)); // Truyền danh sách OrderDetail
-            intent.putExtra("foodItems", new ArrayList<>(foodItemList)); // Truyền danh sách FoodItem
+            intent.putExtra("tableId", tableId); // Pass the tableId to OrderRequestActivity
+            intent.putExtra("orderDetails", new ArrayList<>(orderDetails)); // Pass OrderDetail list
+            intent.putExtra("foodItems", new ArrayList<>(foodItemList)); // Pass FoodItem list
             startActivity(intent);
         });
     }
@@ -85,17 +101,15 @@ public class OrderActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            // Chuyển đổi tài liệu thành đối tượng FoodItem
+                            // Convert document to FoodItem object
                             FoodItem foodItem = document.toObject(FoodItem.class);
-                            foodItemList.add(foodItem); // Thêm vào danh sách
+                            foodItemList.add(foodItem); // Add to list
                         }
-                        adapter.notifyDataSetChanged(); // Cập nhật adapter
+                        adapter.notifyDataSetChanged(); // Update adapter
                     } else {
-                        Toast.makeText(OrderActivity.this, "Lỗi khi lấy dữ liệu: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderActivity.this, "Error fetching data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(OrderActivity.this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(OrderActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 }
