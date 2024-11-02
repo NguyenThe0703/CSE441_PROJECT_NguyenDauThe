@@ -103,29 +103,6 @@
                     android:textStyle="bold"/>
             </TableRow>
 
-            <!-- Dòng dữ liệu mẫu -->
-            <TableRow>
-                <TextView
-                    android:text="1"
-                    android:padding="8dp"
-                    android:gravity="center"/>
-                <TextView
-                    android:text="Phở"
-                    android:padding="8dp"
-                    android:gravity="center"/>
-                <TextView
-                    android:text="1"
-                    android:padding="8dp"
-                    android:gravity="center"/>
-                <TextView
-                    android:text="40k"
-                    android:padding="8dp"
-                    android:gravity="center"/>
-                <TextView
-                    android:text="40k"
-                    android:padding="8dp"
-                    android:gravity="center"/>
-            </TableRow>
 
             <!-- Thêm các dòng dữ liệu món ăn khác ở đây -->
         </TableLayout>

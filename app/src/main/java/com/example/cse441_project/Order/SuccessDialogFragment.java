@@ -1,6 +1,7 @@
 package com.example.cse441_project.Order;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,15 @@ public class SuccessDialogFragment extends DialogFragment {
 
         // Nút OK để đóng dialog
         Button okButton = view.findViewById(R.id.okButton);
-        okButton.setOnClickListener(v -> dismiss());
+        okButton.setOnClickListener(v -> {
+            // Tạo Intent để chuyển sang Activity mới
+            Intent intent = new Intent(getActivity(), TableListActivity.class); // Thay NewActivity bằng tên Activity bạn muốn mở
+            startActivity(intent);
+
+            // Đóng dialog nếu là dialog fragment
+            dismiss();
+        });
+
 
         return view;
     }

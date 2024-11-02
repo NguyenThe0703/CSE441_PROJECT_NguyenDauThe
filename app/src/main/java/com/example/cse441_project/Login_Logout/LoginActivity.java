@@ -63,9 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                                 String idFromDb = employee.getEmployeeId();
                                 if (UserName.equals(usernameFromDb) && PassWorld.equals(passwordFromDb)) {
                                     isValidUser = true;
-                                    //Lưu thông tin cần dùng
+                                    // Lưu thông tin đăng nhập vào SharedPreferences
                                     saveLoginCredentials(UserName, PassWorld,idFromDb);
-
                                     break;
                                 }
                             }
