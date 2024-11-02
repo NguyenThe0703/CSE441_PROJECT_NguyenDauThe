@@ -34,8 +34,8 @@ public class ActivityFormEmployee extends AppCompatActivity {
         employeeAdapter = new EmployeeFormAdapter(employeeList);
         recyclerView.setAdapter(employeeAdapter);
         addEmployee.setOnClickListener(v ->{
-//            Intent intent = new  Intent(ActivityFormEmployee.this,AddEmployee.class);
-//            startActivity(intent);
+           Intent intent = new  Intent(ActivityFormEmployee.this,AddEmployee.class);
+            startActivity(intent);
         });
         loadEmployeesFromFirestore();
     }
