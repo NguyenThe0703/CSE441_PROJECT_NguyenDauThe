@@ -1,4 +1,4 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.FoodItem;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.cse441_project.Dialog.FoodAddSuccess;
 import com.example.cse441_project.Dialog.FoodConfirmUpdate;
 import com.example.cse441_project.Dialog.FoodUpdateSuccess;
 import com.example.cse441_project.Model.Category;

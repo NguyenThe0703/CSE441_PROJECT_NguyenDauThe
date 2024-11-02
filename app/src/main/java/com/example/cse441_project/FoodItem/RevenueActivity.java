@@ -1,4 +1,4 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.FoodItem;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.Adapter.RevenueAdapter;
 import com.example.cse441_project.Model.Order;
 import com.example.cse441_project.R;
 import com.google.firebase.firestore.FirebaseFirestore;

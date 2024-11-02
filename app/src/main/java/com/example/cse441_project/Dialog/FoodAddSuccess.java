@@ -8,7 +8,7 @@ import android.os.Looper;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.example.cse441_project.Home.HomeActivity;
+import com.example.cse441_project.FoodItem.HomeActivity;
 import com.example.cse441_project.R;
 
 public class FoodAddSuccess {

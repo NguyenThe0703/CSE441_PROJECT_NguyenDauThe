@@ -1,7 +1,5 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.Adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +14,14 @@ import com.example.cse441_project.R;
 import java.util.Locale;
 import java.util.List;
 
-public class EditAdapter extends RecyclerView.Adapter<EditAdapter.ViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private List<FoodItem> foodItemList;
-    private Context context;
 
-    public EditAdapter(Context context, List<FoodItem> foodItemList) {
-        this.context = context;
+    public HomeAdapter(List<FoodItem> foodItemList) {
         this.foodItemList = foodItemList;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,12 +41,6 @@ public class EditAdapter extends RecyclerView.Adapter<EditAdapter.ViewHolder> {
         Glide.with(holder.imageView.getContext())
                 .load(foodItem.getImageUrl())
                 .into(holder.imageView);
-
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, EditFood.class);
-            intent.putExtra("foodItem", foodItem); // Truyền FoodItem qua Intent
-            context.startActivity(intent);
-        });
     }
 
     @Override

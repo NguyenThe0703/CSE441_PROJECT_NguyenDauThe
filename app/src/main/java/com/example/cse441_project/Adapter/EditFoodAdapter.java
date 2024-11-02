@@ -1,33 +1,28 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.text.NumberFormat;
 import com.bumptech.glide.Glide;
-import com.example.cse441_project.Dialog.FoodAddSuccess;
-import com.example.cse441_project.Dialog.FoodConfirmDelete;
-import com.example.cse441_project.Dialog.FoodDeleteSuccess;
+import com.example.cse441_project.FoodItem.EditFood;
 import com.example.cse441_project.Model.FoodItem;
 import com.example.cse441_project.R;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Locale;
 import java.util.List;
 
-public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.ViewHolder> {
+public class EditFoodAdapter extends RecyclerView.Adapter<EditFoodAdapter.ViewHolder> {
 
     private List<FoodItem> foodItemList;
     private Context context;
 
-    public DeleteAdapter(Context context, List<FoodItem> foodItemList) {
+    public EditFoodAdapter(Context context, List<FoodItem> foodItemList) {
         this.context = context;
         this.foodItemList = foodItemList;
     }
@@ -52,27 +47,12 @@ public class DeleteAdapter extends RecyclerView.Adapter<DeleteAdapter.ViewHolder
                 .into(holder.imageView);
 
         holder.itemView.setOnClickListener(v -> {
-            // Tạo và hiển thị Dialog xác nhận xóa
-            FoodConfirmDelete dialog = new FoodConfirmDelete(context, () -> {
-                deleteFoodItem(foodItem.getItemFoodID(), position);
-            });
-            dialog.show();
+            Intent intent = new Intent(context, EditFood.class);
+            intent.putExtra("foodItem", foodItem); // Truyền FoodItem qua Intent
+            context.startActivity(intent);
         });
     }
-    private void deleteFoodItem(String itemFoodID, int position) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        db.collection("FoodItem").document(itemFoodID)
-                .delete()
-                .addOnSuccessListener(aVoid -> {
-                    FoodDeleteSuccess dialog = new FoodDeleteSuccess(context);
-                    dialog.showSuccessDialog();
-                    foodItemList.remove(position);
-                    notifyItemRemoved(position);
-                })
-                .addOnFailureListener(e -> {
-                });
-    }
     @Override
     public int getItemCount() {
         return foodItemList.size();

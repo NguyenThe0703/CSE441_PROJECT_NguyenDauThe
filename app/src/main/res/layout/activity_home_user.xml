@@ -46,7 +46,7 @@
     </LinearLayout>
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.cse441_project.Home.HomeFragment"
+        android:name="com.example.cse441_project.FoodItem.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"

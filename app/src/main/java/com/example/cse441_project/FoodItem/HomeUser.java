@@ -1,4 +1,4 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.FoodItem;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 
 import com.example.cse441_project.Login_Logout.IntroActivity;
 import com.example.cse441_project.R;

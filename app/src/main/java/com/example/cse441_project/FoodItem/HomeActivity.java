@@ -1,4 +1,4 @@
-package com.example.cse441_project.Home;
+package com.example.cse441_project.FoodItem;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cse441_project.Adapter.CategoryHomeAdapter;
+import com.example.cse441_project.Adapter.HomeAdapter;
 import com.example.cse441_project.Category.CategoryActivity;
 import com.example.cse441_project.Model.Category;
 import com.example.cse441_project.Order.TableListActivity;
@@ -39,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     private HomeAdapter adapter;
     private List<FoodItem> foodItemList;
     private DrawerLayout drawerLayout;
-    private CategoryAdapter categoryAdapter;
+    private CategoryHomeAdapter categoryAdapter;
     private NavigationView navigationView;
     private ImageView imgMenu;
     private List<Category> categoryList = new ArrayList<>();
@@ -67,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
         adapter = new HomeAdapter(foodItemList);
         recyclerView.setAdapter(adapter);
         fetchCategoriesFromFirestore();
-        categoryAdapter = new CategoryAdapter(categoryList);
+        categoryAdapter = new CategoryHomeAdapter(categoryList);
         rcvCategory.setAdapter(categoryAdapter);
 
         if (savedInstanceState == null) {
