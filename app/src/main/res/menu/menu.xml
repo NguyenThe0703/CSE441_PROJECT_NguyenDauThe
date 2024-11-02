@@ -24,5 +24,6 @@
         android:title="Quản lý nhân viên" />
     <item
         android:id="@+id/nav_order_food"
-        android:title="Gọi Món" />
+        android:title="Gọi Món"
+        android:visible="false" />
 </menu>

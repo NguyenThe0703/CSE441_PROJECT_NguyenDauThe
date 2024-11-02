@@ -13,14 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.cse441_project.DauThe.ActivityFormEmployee;
-//<<<<<<< HEAD
 import com.example.cse441_project.FoodItem.HomeActivity;
-//=======
-//import com.example.cse441_project.DauThe.MyInfoActivity;
-//import com.example.cse441_project.Home.AddFoodActivity;
-//import com.example.cse441_project.Model.Category;
-//>>>>>>> origin/DauThe
+
 import com.example.cse441_project.Model.Employee;
 import com.example.cse441_project.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,11 +41,7 @@ public class IntroActivity extends AppCompatActivity {
         startbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//<<<<<<< HEAD
                 Intent intent = new Intent(IntroActivity.this, LoginActivity.class);
-//=======
-//                Intent intent = new Intent(IntroActivity.this, MyInfoActivity.class);
-//>>>>>>> origin/DauThe
                 startActivity(intent);
             }
         });
@@ -62,7 +52,6 @@ public class IntroActivity extends AppCompatActivity {
             return insets;
         });
     }
-
 
     private void autoLogin() {
 

@@ -25,7 +25,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cse441_project.Adapter.CategoryHomeAdapter;
 import com.example.cse441_project.Adapter.HomeAdapter;
 import com.example.cse441_project.Category.CategoryActivity;
+import com.example.cse441_project.Employee.ActivityFormEmployee;
 import com.example.cse441_project.Model.Category;
+import com.example.cse441_project.Order.OrderActivity;
 import com.example.cse441_project.Order.TableListActivity;
 import com.example.cse441_project.R;
 import com.example.cse441_project.Model.FoodItem;
@@ -123,7 +125,16 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(HomeActivity.this, TopSaleActivity.class));
                 } else if (item.getItemId() == R.id.nav_revenue_statistics) {
                     startActivity(new Intent(HomeActivity.this, RevenueActivity.class));
-                } else {
+                }
+                else if (item.getItemId() == R.id.nav_manage_employee) {
+                    startActivity(new Intent(HomeActivity.this, ActivityFormEmployee.class));
+                }
+                else if (item.getItemId() == R.id.nav_order_food) {
+                    startActivity(new Intent(HomeActivity.this, OrderActivity.class));
+                }
+                else if (item.getItemId() == R.id.nav_revenue_statistics) {
+                    startActivity(new Intent(HomeActivity.this, RevenueActivity.class));
+                }else {
                     Toast.makeText(HomeActivity.this, "Item không xác định", Toast.LENGTH_SHORT).show();
                 }
                 return true;

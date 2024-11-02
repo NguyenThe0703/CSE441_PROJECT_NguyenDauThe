@@ -8,6 +8,7 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cse441_project.Employee.MyInfoActivity;
 import com.example.cse441_project.Login_Logout.IntroActivity;
 import com.example.cse441_project.R;
 
@@ -30,7 +31,7 @@ public class HomeUser extends AppCompatActivity {
             startActivity(new Intent(HomeUser.this, IntroActivity.class));
         });
         myInfo.setOnClickListener(v->{
-            startActivity(new Intent(HomeUser.this, HomeUser.class));
+            startActivity(new Intent(HomeUser.this, MyInfoActivity.class));
         });
     }
 }

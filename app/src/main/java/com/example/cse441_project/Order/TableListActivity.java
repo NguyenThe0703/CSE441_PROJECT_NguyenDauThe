@@ -14,10 +14,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.cse441_project.FoodItem.HomeActivity;
 import com.example.cse441_project.Model.Table;
 import com.example.cse441_project.Adapter.TableAdapter;
 import com.example.cse441_project.R;
-import com.example.cse441_project.Home.HomeActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 

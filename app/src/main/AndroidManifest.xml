@@ -45,7 +45,7 @@
         <activity android:name=".Category.CategoryActivity" />
         <activity android:name=".Category.CategoryEditActivity" />
         <activity android:name=".Category.CategoryAddActivity" />
-        <activity android:name=".DauThe.ActivityFormEmployee" />
+        <activity android:name=".Employee.ActivityFormEmployee" />
         <activity android:name=".FoodItem.AddFoodActivity" />
         <activity android:name=".FoodItem.DeleteFood" />
         <activity android:name=".FoodItem.EditFood" />
@@ -57,63 +57,10 @@
         <activity android:name=".Order.InvoiceActivity" />
         <activity android:name=".Order.OrderActivity" />
         <activity android:name=".Order.TableListActivity" />
-
+        <activity android:name=".Employee.AddEmployee" />
+        <activity android:name=".Employee.EmployeeDetailsActivity" />
+        <activity android:name=".Employee.MyInfoActivity" />
 
     </application>
 
-<!--=======-->
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<manifest xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:tools="http://schemas.android.com/tools">-->
-
-<!--    <uses-permission android:name="android.permission.INTERNET" />-->
-<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-
-<!--    <application-->
-<!--        android:allowBackup="true"-->
-<!--        android:dataExtractionRules="@xml/data_extraction_rules"-->
-<!--        android:fullBackupContent="@xml/backup_rules"-->
-<!--        android:icon="@mipmap/ic_launcher"-->
-<!--        android:label="@string/app_name"-->
-<!--        android:roundIcon="@mipmap/ic_launcher_round"-->
-<!--        android:supportsRtl="true"-->
-<!--        android:theme="@style/Theme.CSE441_PROJECT"-->
-<!--        tools:targetApi="31">-->
-<!--        <activity-->
-<!--            android:name=".User_information_activity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".FormEmployeeActivity"-->
-<!--            android:exported="false" />-->
-
-
-<!--        <activity-->
-<!--            android:name=".home_user"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".DauThe.UpdateInfoActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-<!--        <meta-data-->
-<!--            android:name="preloaded_fonts"-->
-<!--            android:resource="@array/preloaded_fonts" />-->
-
-<!--        <activity android:name=".Login_Logout.LoginActivity" />-->
-<!--        <activity android:name=".Home.HomeActivity" />-->
-<!--        <activity android:name=".Home.AddFoodActivity" />-->
-<!--        <activity android:name=".DauThe.ActivityFormEmployee" />-->
-<!--        <activity android:name=".DauThe.AddEmployee" />-->
-<!--        <activity android:name=".DauThe.MyInfoActivity" />-->
-<!--        <activity android:name=".DauThe.EmployeeDetailsActivity" />-->
-
-<!--    </application>-->
-
-<!--&gt;>>>>>> origin/DauThe-->
 </manifest>

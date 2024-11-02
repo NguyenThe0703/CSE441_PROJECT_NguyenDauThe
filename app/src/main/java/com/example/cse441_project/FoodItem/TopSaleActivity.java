@@ -37,7 +37,7 @@ public class TopSaleActivity extends AppCompatActivity {
         imgBack = findViewById(R.id.img_back);
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new HomeAdapter(foodItemList);
-        fetchTopSellingItems();
+//        fetchTopSellingItems();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         imgBack.setOnClickListener(v->{
