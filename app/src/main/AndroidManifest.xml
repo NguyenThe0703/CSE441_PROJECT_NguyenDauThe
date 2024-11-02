@@ -61,6 +61,7 @@
         <activity android:name=".Employee.EmployeeDetailsActivity" />
         <activity android:name=".Employee.MyInfoActivity" />
 
+
     </application>
 
 </manifest>
