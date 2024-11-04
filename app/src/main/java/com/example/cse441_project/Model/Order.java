@@ -1,54 +1,6 @@
 package com.example.cse441_project.Model;
 
-public class
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Order {
+public class Order {
     private String orderId;          // MaGM
     private String employeeId;       // MaNV
     private String orderDate;        // NgayGoi
