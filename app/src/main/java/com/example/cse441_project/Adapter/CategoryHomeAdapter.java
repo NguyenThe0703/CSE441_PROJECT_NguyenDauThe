@@ -34,12 +34,11 @@ public class CategoryHomeAdapter extends RecyclerView.Adapter<CategoryHomeAdapte
         Category category = categoryList.get(position);
         holder.tvCategoryName.setText(category.getCategoryName());
 
-        // Sử dụng Glide để tải ảnh từ URL
-//        Glide.with(holder.imgCategory.getContext())
-//                .load(category.getImage()) // URL của ảnh Category
-//                .placeholder(R.drawable.ic_launcher_background) // Ảnh hiển thị trong khi tải
-//                .error(R.drawable.ic_launcher_background) // Ảnh hiển thị khi có lỗi
-//                .into(holder.imgCategory);
+        Glide.with(holder.imgCategory.getContext())
+                .load(category.getCategoryImage()) // URL của ảnh Category
+                .placeholder(R.drawable.ic_launcher_background) // Ảnh hiển thị trong khi tải
+                .error(R.drawable.ic_launcher_background) // Ảnh hiển thị khi có lỗi
+                .into(holder.imgCategory);
     }
 
     @Override

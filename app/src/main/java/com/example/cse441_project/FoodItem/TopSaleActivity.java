@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,8 +38,9 @@ public class TopSaleActivity extends AppCompatActivity {
         imgBack = findViewById(R.id.img_back);
         recyclerView = findViewById(R.id.recyclerView);
         adapter = new HomeAdapter(foodItemList);
-//        fetchTopSellingItems();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        fetchTopSellingItems();
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(adapter);
         imgBack.setOnClickListener(v->{
             Intent intent = new Intent(this,HomeActivity.class);
@@ -49,22 +51,34 @@ public class TopSaleActivity extends AppCompatActivity {
 
     public void fetchTopSellingItems() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("OrderDetail")
+        db.collection("Order")
                 .get()
-                .addOnSuccessListener(querySnapshot -> {
-                    for (QueryDocumentSnapshot document : querySnapshot) {
-                        String itemFoodID = document.getString("itemFoodID");
-                        int quantity = document.getLong("quantity").intValue();
-                        foodSalesCount.put(itemFoodID, foodSalesCount.getOrDefault(itemFoodID, 0) + quantity);
+                .addOnSuccessListener(orderSnapshot -> {
+                    for (QueryDocumentSnapshot orderDoc : orderSnapshot) {
+                        String orderId = orderDoc.getId();
+                        // Access the OrderDetail sub-collection for each Order
+                        db.collection("Order")
+                                .document(orderId)
+                                .collection("OrderDetails")
+                                .get()
+                                .addOnSuccessListener(orderDetailSnapshot -> {
+                                    for (QueryDocumentSnapshot detailDoc : orderDetailSnapshot) {
+                                        String itemFoodID = detailDoc.getString("itemFoodID");
+                                        int quantity = detailDoc.getLong("quantity").intValue();
+                                        foodSalesCount.put(itemFoodID, foodSalesCount.getOrDefault(itemFoodID, 0) + quantity);
+                                    }
+                                    // Once all OrderDetails are processed, calculate top items
+                                    List<String> topSellingFoodIds = foodSalesCount.entrySet().stream()
+                                            .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                                            .limit(6)
+                                            .map(Map.Entry::getKey)
+                                            .collect(Collectors.toList());
+                                    fetchFoodDetails(topSellingFoodIds);
+                                })
+                                .addOnFailureListener(e -> Log.e("TopSaleActivity", "Error fetching order detail for order " + orderId, e));
                     }
-                    List<String> topSellingFoodIds = foodSalesCount.entrySet().stream()
-                            .sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
-                            .limit(6)
-                            .map(Map.Entry::getKey)
-                            .collect(Collectors.toList());
-                    fetchFoodDetails(topSellingFoodIds);
                 })
-                .addOnFailureListener(e -> Log.e("TopSaleActivity", "Error fetching order details", e));
+                .addOnFailureListener(e -> Log.e("TopSaleActivity", "Error fetching orders", e));
     }
 
     private void fetchFoodDetails(List<String> topSellingFoodIds) {
@@ -75,9 +89,7 @@ public class TopSaleActivity extends AppCompatActivity {
                 .addOnSuccessListener(querySnapshot -> {
                     for (QueryDocumentSnapshot document : querySnapshot) {
                         FoodItem foodItem = document.toObject(FoodItem.class);
-                        // Thêm món ăn vào danh sách và in ra số lượng đã bán
                         foodItemList.add(foodItem);
-                        Toast.makeText(TopSaleActivity.this, "1", Toast.LENGTH_SHORT).show();
                         Log.d("TopSaleActivity", "Food Item: " + foodItem.getFoodName() + ", Sold Quantity: " +
                                 foodSalesCount.get(foodItem.getItemFoodID()));
                     }
@@ -85,4 +97,5 @@ public class TopSaleActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(e -> Log.e("TopSaleActivity", "Error fetching food item details", e));
     }
+
 }

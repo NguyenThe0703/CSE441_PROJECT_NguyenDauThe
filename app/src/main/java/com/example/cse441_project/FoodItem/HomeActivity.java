@@ -71,6 +71,7 @@ public class HomeActivity extends AppCompatActivity {
         adapter = new HomeAdapter(foodItemList);
         recyclerView.setAdapter(adapter);
         fetchCategoriesFromFirestore();
+
         categoryAdapter = new CategoryHomeAdapter(categoryList);
         rcvCategory.setAdapter(categoryAdapter);
 
