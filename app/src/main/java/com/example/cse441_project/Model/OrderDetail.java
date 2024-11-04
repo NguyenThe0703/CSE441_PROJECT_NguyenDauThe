@@ -1,6 +1,8 @@
 package com.example.cse441_project.Model;
 
-public class OrderDetail {
+import java.io.Serializable;
+
+public class OrderDetail implements Serializable {
     private String orderId;        // MaGM
     private String itemFoodID;     // MaThucDon
     private int quantity;          // SoLuong
